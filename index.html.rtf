@@ -1,0 +1,1568 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2758
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 LucidaGrande;\f2\fnil\fcharset0 AppleColorEmoji;
+}
+{\colortbl;\red255\green255\blue255;\red42\green44\blue51;\red255\green255\blue255;\red219\green63\blue57;
+\red167\green87\blue5;\red66\green147\blue62;\red50\green94\blue238;\red143\green144\blue150;\red147\green0\blue147;
+}
+{\*\expandedcolortbl;;\cssrgb\c21961\c22745\c25882;\cssrgb\c100000\c100000\c100000;\cssrgb\c89412\c33725\c28627;
+\cssrgb\c71765\c41961\c392;\cssrgb\c31373\c63137\c30980;\cssrgb\c25098\c47059\c94902;\cssrgb\c62745\c63137\c65490;\cssrgb\c65098\c14902\c64314;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28300\viewh17140\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+<!DOCTYPE html>\
+<\cf4 html \cf5 lang\cf2 ="\cf6 en\cf2 ">\
+<\cf4 head\cf2 >\
+  <\cf4 meta \cf5 charset\cf2 ="\cf6 UTF-8\cf2 ">\
+  <\cf4 meta \cf5 name\cf2 ="\cf6 viewport\cf2 "\cf4  \cf5 content\cf2 ="\cf6 width=device-width, initial-scale=1.0\cf2 ">\
+  <\cf4 title\cf2 >Bo Agent | Istia WMS</\cf4 title\cf2 >\
+  <\cf4 link \cf5 href\cf2 ="\cf6 https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap\cf2 "\cf4  \cf5 rel\cf2 ="\cf6 stylesheet\cf2 ">\
+  <\cf4 style\cf2 >\
+    \cf6 *\cf2  \{ \cf4 box-sizing\cf2 : border-box; \cf4 margin\cf2 : \cf5 0\cf2 ; \cf4 padding\cf2 : \cf5 0\cf2 ; \}\
+    \
+    \cf6 :root\cf2  \{\
+      \cf7 --istia-dark\cf2 : #0d3d4d;\
+      \cf7 --istia-teal\cf2 : #2d5a6b;\
+      \cf7 --white\cf2 : #ffffff;\
+      \cf7 --grey\cf2 : #6b7280;\
+      \cf7 --light-grey\cf2 : #f8f9fa;\
+      \cf7 --border\cf2 : #e5e7eb;\
+    \}\
+    \
+    \cf6 body\cf2  \{\
+      \cf4 font-family\cf2 : \cf6 'Inter'\cf2 , sans-serif;\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --white\cf2 );\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 line-height\cf2 : \cf5 1.6\cf2 ;\
+    \}\
+    \
+    \cf8 /* PASSWORD MODAL */\cf2 \
+    \cf6 .modal-overlay\cf2  \{\
+      \cf4 display\cf2 : none;\
+      \cf4 position\cf2 : fixed;\
+      \cf4 top\cf2 : \cf5 0\cf2 ;\
+      \cf4 left\cf2 : \cf5 0\cf2 ;\
+      \cf4 width\cf2 : \cf5 100\cf2 %;\
+      \cf4 height\cf2 : \cf5 100\cf2 %;\
+      \cf4 background\cf2 : \cf7 rgba\cf2 (\cf5 13\cf2 , \cf5 61\cf2 , \cf5 77\cf2 , \cf5 0.9\cf2 );\
+      \cf4 backdrop-filter\cf2 : \cf7 blur\cf2 (\cf5 5\cf2 px);\
+      \cf4 z-index\cf2 : \cf5 1000\cf2 ;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 padding\cf2 : \cf5 20\cf2 px;\
+    \}\
+    \
+    \cf6 .modal-overlay.active\cf2  \{ \cf4 display\cf2 : flex; \}\
+    \
+    \cf6 .login-container\cf2  \{\
+      \cf4 background\cf2 : white;\
+      \cf4 border-radius\cf2 : \cf5 20\cf2 px;\
+      \cf4 padding\cf2 : \cf5 50\cf2 px \cf5 40\cf2 px;\
+      \cf4 width\cf2 : \cf5 100\cf2 %;\
+      \cf4 max-width\cf2 : \cf5 420\cf2 px;\
+      \cf4 box-shadow\cf2 : \cf5 0\cf2  \cf5 25\cf2 px \cf5 50\cf2 px \cf7 rgba\cf2 (\cf5 0\cf2 ,\cf5 0\cf2 ,\cf5 0\cf2 ,\cf5 0.25\cf2 );\
+      \cf4 text-align\cf2 : center;\
+    \}\
+    \
+    \cf6 .cancel-btn\cf2  \{\
+      \cf4 width\cf2 : \cf5 100\cf2 %;\
+      \cf4 padding\cf2 : \cf5 14\cf2 px;\
+      \cf4 background\cf2 : none;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 border\cf2 : \cf5 1\cf2 px solid \cf7 var\cf2 (\cf7 --border\cf2 );\
+      \cf4 border-radius\cf2 : \cf5 12\cf2 px;\
+      \cf4 font-size\cf2 : \cf5 14\cf2 px;\
+      \cf4 cursor\cf2 : pointer;\
+      \cf4 margin-top\cf2 : \cf5 12\cf2 px;\
+      \cf4 transition\cf2 : all \cf5 0.2\cf2 s;\
+    \}\
+    \
+    \cf6 .cancel-btn:hover\cf2  \{\
+      \cf4 border-color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+    \}\
+    \
+    \cf6 .login-logo\cf2  \{\
+      \cf4 display\cf2 : flex;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 gap\cf2 : \cf5 12\cf2 px;\
+      \cf4 margin-bottom\cf2 : \cf5 10\cf2 px;\
+    \}\
+    \
+    \cf6 .login-logo svg\cf2  \{ \cf4 width\cf2 : \cf5 50\cf2 px; \cf4 height\cf2 : \cf5 50\cf2 px; \}\
+    \
+    \cf6 .login-logo-text\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 32\cf2 px;\
+      \cf4 font-weight\cf2 : \cf5 700\cf2 ;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+    \}\
+    \
+    \cf6 .login-subtitle\cf2  \{\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 font-size\cf2 : \cf5 14\cf2 px;\
+      \cf4 margin-bottom\cf2 : \cf5 40\cf2 px;\
+    \}\
+    \
+    \cf6 .login-title\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 24\cf2 px;\
+      \cf4 font-weight\cf2 : \cf5 600\cf2 ;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 margin-bottom\cf2 : \cf5 8\cf2 px;\
+    \}\
+    \
+    \cf6 .login-desc\cf2  \{\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 font-size\cf2 : \cf5 14\cf2 px;\
+      \cf4 margin-bottom\cf2 : \cf5 30\cf2 px;\
+    \}\
+    \
+    \cf6 .login-input-group\cf2  \{\
+      \cf4 position\cf2 : relative;\
+      \cf4 margin-bottom\cf2 : \cf5 20\cf2 px;\
+    \}\
+    \
+    \cf6 .login-input\cf2  \{\
+      \cf4 width\cf2 : \cf5 100\cf2 %;\
+      \cf4 padding\cf2 : \cf5 16\cf2 px \cf5 20\cf2 px;\
+      \cf4 padding-right\cf2 : \cf5 50\cf2 px;\
+      \cf4 border\cf2 : \cf5 2\cf2 px solid \cf7 var\cf2 (\cf7 --border\cf2 );\
+      \cf4 border-radius\cf2 : \cf5 12\cf2 px;\
+      \cf4 font-size\cf2 : \cf5 16\cf2 px;\
+      \cf4 outline\cf2 : none;\
+      \cf4 transition\cf2 : all \cf5 0.3\cf2 s;\
+    \}\
+    \
+    \cf6 .login-input:focus\cf2  \{\
+      \cf4 border-color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+    \}\
+    \
+    \cf6 .login-input.error\cf2  \{\
+      \cf4 border-color\cf2 : #dc2626;\
+      \cf4 animation\cf2 : shake \cf5 0.5\cf2 s;\
+    \}\
+    \
+    \cf5 @keyframes shake\cf2  \{\
+      \cf6 0%\cf2 ,\cf6  100%\cf2  \{ \cf4 transform\cf2 : \cf7 translateX\cf2 (\cf5 0\cf2 ); \}\
+      \cf6 20%\cf2 ,\cf6  60%\cf2  \{ \cf4 transform\cf2 : \cf7 translateX\cf2 (\cf5 -5\cf2 px); \}\
+      \cf6 40%\cf2 ,\cf6  80%\cf2  \{ \cf4 transform\cf2 : \cf7 translateX\cf2 (\cf5 5\cf2 px); \}\
+    \}\
+    \
+    \cf6 .toggle-password\cf2  \{\
+      \cf4 position\cf2 : absolute;\
+      \cf4 right\cf2 : \cf5 15\cf2 px;\
+      \cf4 top\cf2 : \cf5 50\cf2 %;\
+      \cf4 transform\cf2 : \cf7 translateY\cf2 (\cf5 -50\cf2 %);\
+      \cf4 background\cf2 : none;\
+      \cf4 border\cf2 : none;\
+      \cf4 cursor\cf2 : pointer;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 padding\cf2 : \cf5 5\cf2 px;\
+    \}\
+    \
+    \cf6 .toggle-password:hover\cf2  \{ \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 ); \}\
+    \
+    \cf6 .login-btn\cf2  \{\
+      \cf4 width\cf2 : \cf5 100\cf2 %;\
+      \cf4 padding\cf2 : \cf5 16\cf2 px;\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 color\cf2 : white;\
+      \cf4 border\cf2 : none;\
+      \cf4 border-radius\cf2 : \cf5 12\cf2 px;\
+      \cf4 font-size\cf2 : \cf5 16\cf2 px;\
+      \cf4 font-weight\cf2 : \cf5 600\cf2 ;\
+      \cf4 cursor\cf2 : pointer;\
+      \cf4 transition\cf2 : all \cf5 0.3\cf2 s;\
+    \}\
+    \
+    \cf6 .login-btn:hover\cf2  \{\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-teal\cf2 );\
+      \cf4 transform\cf2 : \cf7 translateY\cf2 (\cf5 -2\cf2 px);\
+    \}\
+    \
+    \cf6 .login-error\cf2  \{\
+      \cf4 color\cf2 : #dc2626;\
+      \cf4 font-size\cf2 : \cf5 13\cf2 px;\
+      \cf4 margin-top\cf2 : \cf5 15\cf2 px;\
+      \cf4 min-height\cf2 : \cf5 20\cf2 px;\
+    \}\
+    \
+    \cf6 .login-footer\cf2  \{\
+      \cf4 margin-top\cf2 : \cf5 30\cf2 px;\
+      \cf4 padding-top\cf2 : \cf5 20\cf2 px;\
+      \cf4 border-top\cf2 : \cf5 1\cf2 px solid \cf7 var\cf2 (\cf7 --border\cf2 );\
+      \cf4 font-size\cf2 : \cf5 12\cf2 px;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+    \}\
+    \
+    \cf8 /* MAIN APP (hidden until login) */\cf2 \
+    \cf6 .main-app\cf2  \{ \cf4 display\cf2 : none; \}\
+    \cf6 .main-app.active\cf2  \{ \cf4 display\cf2 : block; \}\
+    \
+    \cf8 /* Header */\cf2 \
+    \cf6 .header\cf2  \{\
+      \cf4 display\cf2 : flex;\
+      \cf4 justify-content\cf2 : space-between;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 padding\cf2 : \cf5 20\cf2 px \cf5 40\cf2 px;\
+      \cf4 border-bottom\cf2 : \cf5 1\cf2 px solid \cf7 var\cf2 (\cf7 --border\cf2 );\
+    \}\
+    \
+    \cf6 .logo\cf2  \{\
+      \cf4 display\cf2 : flex;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 gap\cf2 : \cf5 12\cf2 px;\
+      \cf4 cursor\cf2 : pointer;\
+    \}\
+    \
+    \cf6 .logo-icon\cf2  \{ \cf4 width\cf2 : \cf5 32\cf2 px; \cf4 height\cf2 : \cf5 32\cf2 px; \}\
+    \
+    \cf6 .logo-name\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 24\cf2 px;\
+      \cf4 font-weight\cf2 : \cf5 700\cf2 ;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+    \}\
+    \
+    \cf6 .logo-tagline\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 11\cf2 px;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 border-left\cf2 : \cf5 1\cf2 px solid \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 padding-left\cf2 : \cf5 12\cf2 px;\
+      \cf4 line-height\cf2 : \cf5 1.4\cf2 ;\
+    \}\
+    \
+    \cf6 .header-right\cf2  \{\
+      \cf4 display\cf2 : flex;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 gap\cf2 : \cf5 20\cf2 px;\
+    \}\
+    \
+    \cf6 .logout-btn\cf2  \{\
+      \cf4 padding\cf2 : \cf5 8\cf2 px \cf5 16\cf2 px;\
+      \cf4 border\cf2 : \cf5 1\cf2 px solid \cf7 var\cf2 (\cf7 --border\cf2 );\
+      \cf4 border-radius\cf2 : \cf5 8\cf2 px;\
+      \cf4 background\cf2 : none;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 font-size\cf2 : \cf5 13\cf2 px;\
+      \cf4 cursor\cf2 : pointer;\
+      \cf4 transition\cf2 : all \cf5 0.2\cf2 s;\
+    \}\
+    \
+    \cf6 .logout-btn:hover\cf2  \{\
+      \cf4 border-color\cf2 : #dc2626;\
+      \cf4 color\cf2 : #dc2626;\
+    \}\
+    \
+    \cf6 .menu-icon\cf2  \{\
+      \cf4 display\cf2 : flex;\
+      \cf4 flex-direction\cf2 : column;\
+      \cf4 gap\cf2 : \cf5 5\cf2 px;\
+      \cf4 cursor\cf2 : pointer;\
+    \}\
+    \
+    \cf6 .menu-icon span\cf2  \{\
+      \cf4 width\cf2 : \cf5 24\cf2 px;\
+      \cf4 height\cf2 : \cf5 2\cf2 px;\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+    \}\
+    \
+    \cf8 /* Intro Page Styles */\cf2 \
+    \cf6 .intro-page\cf2  \{ \cf4 display\cf2 : block; \}\
+    \cf6 .intro-page.hidden\cf2  \{ \cf4 display\cf2 : none; \}\
+    \
+    \cf6 .container\cf2  \{\
+      \cf4 max-width\cf2 : \cf5 1100\cf2 px;\
+      \cf4 margin\cf2 : \cf5 0\cf2  auto;\
+      \cf4 padding\cf2 : \cf5 60\cf2 px \cf5 40\cf2 px;\
+    \}\
+    \
+    \cf6 .section-title\cf2  \{\
+      \cf4 text-align\cf2 : center;\
+      \cf4 margin-bottom\cf2 : \cf5 50\cf2 px;\
+    \}\
+    \
+    \cf6 .section-title h2\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 36\cf2 px;\
+      \cf4 font-weight\cf2 : \cf5 400\cf2 ;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 margin-bottom\cf2 : \cf5 16\cf2 px;\
+    \}\
+    \
+    \cf6 .section-title p\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 15\cf2 px;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 max-width\cf2 : \cf5 700\cf2 px;\
+      \cf4 margin\cf2 : \cf5 0\cf2  auto;\
+    \}\
+    \
+    \cf6 .cards-grid\cf2  \{\
+      \cf4 display\cf2 : grid;\
+      \cf4 grid-template-columns\cf2 : \cf7 repeat\cf2 (\cf5 2\cf2 , \cf5 1\cf2 fr);\
+      \cf4 gap\cf2 : \cf5 24\cf2 px;\
+      \cf4 margin-bottom\cf2 : \cf5 80\cf2 px;\
+    \}\
+    \
+    \cf5 @media \cf2 (\cf4 max-width\cf2 :\cf5  600px\cf2 ) \{\
+      \cf6 .cards-grid\cf2  \{ \cf4 grid-template-columns\cf2 : \cf5 1\cf2 fr; \}\
+    \}\
+    \
+    \cf6 .card\cf2  \{\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --light-grey\cf2 );\
+      \cf4 border-radius\cf2 : \cf5 12\cf2 px;\
+      \cf4 padding\cf2 : \cf5 28\cf2 px;\
+      \cf4 transition\cf2 : all \cf5 0.3\cf2 s ease;\
+      \cf4 cursor\cf2 : pointer;\
+    \}\
+    \
+    \cf6 .card:hover\cf2  \{ \cf4 transform\cf2 : \cf7 translateY\cf2 (\cf5 -4\cf2 px); \}\
+    \
+    \cf6 .card.active\cf2  \{\
+      \cf4 background\cf2 : \cf7 linear-gradient\cf2 (\cf5 135\cf2 deg, #0d3d4d \cf5 0\cf2 %, #1a5a6b \cf5 100\cf2 %);\
+      \cf4 transform\cf2 : \cf7 translateY\cf2 (\cf5 -4\cf2 px);\
+    \}\
+    \
+    \cf6 .card-icon\cf2  \{\
+      \cf4 width\cf2 : \cf5 56\cf2 px;\
+      \cf4 height\cf2 : \cf5 56\cf2 px;\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --white\cf2 );\
+      \cf4 border-radius\cf2 : \cf5 12\cf2 px;\
+      \cf4 display\cf2 : flex;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 margin-bottom\cf2 : \cf5 24\cf2 px;\
+      \cf4 transition\cf2 : all \cf5 0.3\cf2 s ease;\
+    \}\
+    \
+    \cf6 .card.active .card-icon\cf2  \{ \cf4 background\cf2 : \cf7 rgba\cf2 (\cf5 255\cf2 ,\cf5 255\cf2 ,\cf5 255\cf2 ,\cf5 0.2\cf2 ); \}\
+    \
+    \cf6 .card-icon svg\cf2  \{\
+      \cf4 width\cf2 : \cf5 28\cf2 px;\
+      \cf4 height\cf2 : \cf5 28\cf2 px;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 transition\cf2 : all \cf5 0.3\cf2 s ease;\
+    \}\
+    \
+    \cf6 .card.active .card-icon svg\cf2  \{ \cf4 color\cf2 : white; \}\
+    \
+    \cf6 .card h3\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 20\cf2 px;\
+      \cf4 font-weight\cf2 : \cf5 600\cf2 ;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 margin-bottom\cf2 : \cf5 12\cf2 px;\
+      \cf4 transition\cf2 : all \cf5 0.3\cf2 s ease;\
+    \}\
+    \
+    \cf6 .card.active h3\cf2  \{ \cf4 color\cf2 : white; \}\
+    \
+    \cf6 .card p\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 14\cf2 px;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 line-height\cf2 : \cf5 1.7\cf2 ;\
+      \cf4 transition\cf2 : all \cf5 0.3\cf2 s ease;\
+    \}\
+    \
+    \cf6 .card.active p\cf2  \{ \cf4 color\cf2 : \cf7 rgba\cf2 (\cf5 255\cf2 ,\cf5 255\cf2 ,\cf5 255\cf2 ,\cf5 0.85\cf2 ); \}\
+    \
+    \cf6 .features\cf2  \{ \cf4 margin-bottom\cf2 : \cf5 80\cf2 px; \}\
+    \
+    \cf6 .feature-cards\cf2  \{\
+      \cf4 display\cf2 : grid;\
+      \cf4 grid-template-columns\cf2 : \cf7 repeat\cf2 (\cf5 2\cf2 , \cf5 1\cf2 fr);\
+      \cf4 gap\cf2 : \cf5 24\cf2 px;\
+    \}\
+    \
+    \cf5 @media \cf2 (\cf4 max-width\cf2 :\cf5  700px\cf2 ) \{\
+      \cf6 .feature-cards\cf2  \{ \cf4 grid-template-columns\cf2 : \cf5 1\cf2 fr; \}\
+    \}\
+    \
+    \cf6 .feature-card\cf2  \{\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --light-grey\cf2 );\
+      \cf4 border-radius\cf2 : \cf5 12\cf2 px;\
+      \cf4 padding\cf2 : \cf5 32\cf2 px;\
+      \cf4 display\cf2 : flex;\
+      \cf4 gap\cf2 : \cf5 20\cf2 px;\
+    \}\
+    \
+    \cf6 .feature-icon\cf2  \{\
+      \cf4 width\cf2 : \cf5 48\cf2 px;\
+      \cf4 height\cf2 : \cf5 48\cf2 px;\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 border-radius\cf2 : \cf5 10\cf2 px;\
+      \cf4 display\cf2 : flex;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 flex-shrink\cf2 : \cf5 0\cf2 ;\
+    \}\
+    \
+    \cf6 .feature-icon svg\cf2  \{\
+      \cf4 width\cf2 : \cf5 24\cf2 px;\
+      \cf4 height\cf2 : \cf5 24\cf2 px;\
+      \cf4 color\cf2 : white;\
+    \}\
+    \
+    \cf6 .feature-content h4\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 17\cf2 px;\
+      \cf4 font-weight\cf2 : \cf5 600\cf2 ;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 margin-bottom\cf2 : \cf5 8\cf2 px;\
+    \}\
+    \
+    \cf6 .feature-content p\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 14\cf2 px;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 line-height\cf2 : \cf5 1.6\cf2 ;\
+    \}\
+    \
+    \cf6 .data-section\cf2  \{\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --light-grey\cf2 );\
+      \cf4 border-radius\cf2 : \cf5 16\cf2 px;\
+      \cf4 padding\cf2 : \cf5 40\cf2 px;\
+      \cf4 margin-bottom\cf2 : \cf5 60\cf2 px;\
+    \}\
+    \
+    \cf6 .data-section h3\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 20\cf2 px;\
+      \cf4 font-weight\cf2 : \cf5 600\cf2 ;\
+      \cf4 margin-bottom\cf2 : \cf5 24\cf2 px;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+    \}\
+    \
+    \cf6 .data-tags\cf2  \{\
+      \cf4 display\cf2 : flex;\
+      \cf4 flex-wrap\cf2 : wrap;\
+      \cf4 gap\cf2 : \cf5 10\cf2 px;\
+    \}\
+    \
+    \cf6 .data-tag\cf2  \{\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --white\cf2 );\
+      \cf4 padding\cf2 : \cf5 8\cf2 px \cf5 16\cf2 px;\
+      \cf4 border-radius\cf2 : \cf5 20\cf2 px;\
+      \cf4 font-size\cf2 : \cf5 13\cf2 px;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 border\cf2 : \cf5 1\cf2 px solid \cf7 var\cf2 (\cf7 --border\cf2 );\
+    \}\
+    \
+    \cf6 .cta\cf2  \{\
+      \cf4 text-align\cf2 : center;\
+      \cf4 padding\cf2 : \cf5 40\cf2 px \cf5 0\cf2 ;\
+    \}\
+    \
+    \cf6 .cta-btn\cf2  \{\
+      \cf4 display\cf2 : inline-block;\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 color\cf2 : white;\
+      \cf4 padding\cf2 : \cf5 16\cf2 px \cf5 40\cf2 px;\
+      \cf4 border-radius\cf2 : \cf5 8\cf2 px;\
+      \cf4 text-decoration\cf2 : none;\
+      \cf4 font-weight\cf2 : \cf5 500\cf2 ;\
+      \cf4 font-size\cf2 : \cf5 15\cf2 px;\
+      \cf4 cursor\cf2 : pointer;\
+      \cf4 border\cf2 : none;\
+      \cf4 transition\cf2 : background \cf5 0.2\cf2 s;\
+    \}\
+    \
+    \cf6 .cta-btn:hover\cf2  \{ \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-teal\cf2 ); \}\
+    \
+    \cf8 /* Chat Interface Styles */\cf2 \
+    \cf6 .chat-page\cf2  \{\
+      \cf4 display\cf2 : none;\
+      \cf4 flex-direction\cf2 : column;\
+      \cf4 height\cf2 : \cf7 calc\cf2 (\cf5 100\cf2 vh \cf7 -\cf2  \cf5 73\cf2 px);\
+      \cf4 max-width\cf2 : \cf5 800\cf2 px;\
+      \cf4 margin\cf2 : \cf5 0\cf2  auto;\
+      \cf4 padding\cf2 : \cf5 20\cf2 px;\
+    \}\
+    \
+    \cf6 .chat-page.active\cf2  \{ \cf4 display\cf2 : flex; \}\
+    \
+    \cf6 .chat-area\cf2  \{\
+      \cf4 flex\cf2 : \cf5 1\cf2 ;\
+      \cf4 overflow-y\cf2 : auto;\
+      \cf4 padding\cf2 : \cf5 20\cf2 px \cf5 0\cf2 ;\
+    \}\
+    \
+    \cf6 .welcome-section\cf2  \{\
+      \cf4 flex\cf2 : \cf5 1\cf2 ;\
+      \cf4 display\cf2 : flex;\
+      \cf4 flex-direction\cf2 : column;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 align-items\cf2 : center;\
+    \}\
+    \
+    \cf6 .welcome-section.hidden\cf2  \{ \cf4 display\cf2 : none; \}\
+    \
+    \cf6 .welcome-text\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 32\cf2 px;\
+      \cf4 font-weight\cf2 : \cf5 600\cf2 ;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 text-align\cf2 : center;\
+    \}\
+    \
+    \cf6 .message\cf2  \{\
+      \cf4 display\cf2 : flex;\
+      \cf4 gap\cf2 : \cf5 12\cf2 px;\
+      \cf4 margin-bottom\cf2 : \cf5 20\cf2 px;\
+      \cf4 animation\cf2 : fadeIn \cf5 0.3\cf2 s ease;\
+    \}\
+    \
+    \cf5 @keyframes fadeIn\cf2  \{\
+      \cf6 from\cf2  \{ \cf4 opacity\cf2 : \cf5 0\cf2 ; \cf4 transform\cf2 : \cf7 translateY\cf2 (\cf5 10\cf2 px); \}\
+      \cf6 to\cf2  \{ \cf4 opacity\cf2 : \cf5 1\cf2 ; \cf4 transform\cf2 : \cf7 translateY\cf2 (\cf5 0\cf2 ); \}\
+    \}\
+    \
+    \cf6 .message.user\cf2  \{ \cf4 flex-direction\cf2 : row-reverse; \}\
+    \
+    \cf6 .avatar\cf2  \{\
+      \cf4 width\cf2 : \cf5 36\cf2 px;\
+      \cf4 height\cf2 : \cf5 36\cf2 px;\
+      \cf4 border-radius\cf2 : \cf5 50\cf2 %;\
+      \cf4 display\cf2 : flex;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 flex-shrink\cf2 : \cf5 0\cf2 ;\
+      \cf4 font-size\cf2 : \cf5 14\cf2 px;\
+    \}\
+    \
+    \cf6 .message.bot .avatar\cf2  \{ \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 ); \}\
+    \
+    \cf6 .message.user .avatar\cf2  \{\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-teal\cf2 );\
+      \cf4 color\cf2 : white;\
+    \}\
+    \
+    \cf6 .bubble\cf2  \{\
+      \cf4 max-width\cf2 : \cf5 70\cf2 %;\
+      \cf4 padding\cf2 : \cf5 14\cf2 px \cf5 18\cf2 px;\
+      \cf4 border-radius\cf2 : \cf5 20\cf2 px;\
+      \cf4 font-size\cf2 : \cf5 15\cf2 px;\
+      \cf4 line-height\cf2 : \cf5 1.6\cf2 ;\
+    \}\
+    \
+    \cf6 .message.bot .bubble\cf2  \{\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --light-grey\cf2 );\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 position\cf2 : relative;\
+    \}\
+    \
+    \cf6 .message.user .bubble\cf2  \{\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 color\cf2 : white;\
+    \}\
+    \
+    \cf6 .speak-btn\cf2  \{\
+      \cf4 position\cf2 : absolute;\
+      \cf4 bottom\cf2 : \cf5 8\cf2 px;\
+      \cf4 right\cf2 : \cf5 8\cf2 px;\
+      \cf4 width\cf2 : \cf5 28\cf2 px;\
+      \cf4 height\cf2 : \cf5 28\cf2 px;\
+      \cf4 border\cf2 : none;\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 border-radius\cf2 : \cf5 50\cf2 %;\
+      \cf4 cursor\cf2 : pointer;\
+      \cf4 display\cf2 : flex;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 opacity\cf2 : \cf5 0.7\cf2 ;\
+      \cf4 transition\cf2 : all \cf5 0.2\cf2 s;\
+    \}\
+    \
+    \cf6 .speak-btn:hover\cf2  \{\
+      \cf4 opacity\cf2 : \cf5 1\cf2 ;\
+      \cf4 transform\cf2 : \cf7 scale\cf2 (\cf5 1.1\cf2 );\
+    \}\
+    \
+    \cf6 .speak-btn svg\cf2  \{\
+      \cf4 width\cf2 : \cf5 14\cf2 px;\
+      \cf4 height\cf2 : \cf5 14\cf2 px;\
+      \cf4 color\cf2 : white;\
+    \}\
+    \
+    \cf6 .input-container\cf2  \{ \cf4 padding\cf2 : \cf5 20\cf2 px \cf5 0\cf2 ; \}\
+    \
+    \cf6 .input-bar\cf2  \{\
+      \cf4 display\cf2 : flex;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 gap\cf2 : \cf5 12\cf2 px;\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --light-grey\cf2 );\
+      \cf4 border-radius\cf2 : \cf5 30\cf2 px;\
+      \cf4 padding\cf2 : \cf5 8\cf2 px \cf5 8\cf2 px \cf5 8\cf2 px \cf5 20\cf2 px;\
+      \cf4 border\cf2 : \cf5 1\cf2 px solid \cf7 var\cf2 (\cf7 --border\cf2 );\
+    \}\
+    \
+    \cf6 .input-bar:focus-within\cf2  \{ \cf4 border-color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 ); \}\
+    \
+    \cf6 .input-bar input\cf2  \{\
+      \cf4 flex\cf2 : \cf5 1\cf2 ;\
+      \cf4 border\cf2 : none;\
+      \cf4 background\cf2 : none;\
+      \cf4 font-size\cf2 : \cf5 16\cf2 px;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 outline\cf2 : none;\
+    \}\
+    \
+    \cf6 .input-bar input::placeholder\cf2  \{ \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 ); \}\
+    \
+    \cf6 .mic-btn\cf2  \{\
+      \cf4 width\cf2 : \cf5 40\cf2 px;\
+      \cf4 height\cf2 : \cf5 40\cf2 px;\
+      \cf4 border-radius\cf2 : \cf5 50\cf2 %;\
+      \cf4 border\cf2 : none;\
+      \cf4 background\cf2 : none;\
+      \cf4 cursor\cf2 : pointer;\
+      \cf4 display\cf2 : flex;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 transition\cf2 : all \cf5 0.2\cf2 s;\
+    \}\
+    \
+    \cf6 .mic-btn:hover\cf2  \{ \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 ); \}\
+    \
+    \cf6 .mic-btn.recording\cf2  \{\
+      \cf4 background\cf2 : #dc2626;\
+      \cf4 color\cf2 : white;\
+      \cf4 animation\cf2 : pulse \cf5 1.5\cf2 s infinite;\
+    \}\
+    \
+    \cf5 @keyframes pulse\cf2  \{\
+      \cf6 0%\cf2 ,\cf6  100%\cf2  \{ \cf4 box-shadow\cf2 : \cf5 0\cf2  \cf5 0\cf2  \cf5 0\cf2  \cf5 0\cf2  \cf7 rgba\cf2 (\cf5 220\cf2 , \cf5 38\cf2 , \cf5 38\cf2 , \cf5 0.4\cf2 ); \}\
+      \cf6 50%\cf2  \{ \cf4 box-shadow\cf2 : \cf5 0\cf2  \cf5 0\cf2  \cf5 0\cf2  \cf5 10\cf2 px \cf7 rgba\cf2 (\cf5 220\cf2 , \cf5 38\cf2 , \cf5 38\cf2 , \cf5 0\cf2 ); \}\
+    \}\
+    \
+    \cf6 .mic-btn svg\cf2  \{\
+      \cf4 width\cf2 : \cf5 20\cf2 px;\
+      \cf4 height\cf2 : \cf5 20\cf2 px;\
+    \}\
+    \
+    \cf6 .send-btn\cf2  \{\
+      \cf4 width\cf2 : \cf5 44\cf2 px;\
+      \cf4 height\cf2 : \cf5 44\cf2 px;\
+      \cf4 border-radius\cf2 : \cf5 50\cf2 %;\
+      \cf4 border\cf2 : none;\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 cursor\cf2 : pointer;\
+      \cf4 display\cf2 : flex;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 transition\cf2 : all \cf5 0.2\cf2 s;\
+    \}\
+    \
+    \cf6 .send-btn:hover\cf2  \{\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-teal\cf2 );\
+      \cf4 transform\cf2 : \cf7 scale\cf2 (\cf5 1.05\cf2 );\
+    \}\
+    \
+    \cf6 .send-btn svg\cf2  \{\
+      \cf4 width\cf2 : \cf5 20\cf2 px;\
+      \cf4 height\cf2 : \cf5 20\cf2 px;\
+      \cf4 color\cf2 : white;\
+    \}\
+    \
+    \cf6 .status\cf2  \{\
+      \cf4 text-align\cf2 : center;\
+      \cf4 font-size\cf2 : \cf5 13\cf2 px;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 margin-top\cf2 : \cf5 12\cf2 px;\
+      \cf4 min-height\cf2 : \cf5 20\cf2 px;\
+    \}\
+    \
+    \cf6 .status.processing\cf2  \{ \cf4 color\cf2 : #f59e0b; \}\
+    \cf6 .status.error\cf2  \{ \cf4 color\cf2 : #dc2626; \}\
+    \cf6 .status.listening\cf2  \{ \cf4 color\cf2 : #059669; \}\
+    \
+    \cf6 .lang-toggle\cf2  \{\
+      \cf4 display\cf2 : flex;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 gap\cf2 : \cf5 8\cf2 px;\
+      \cf4 margin-top\cf2 : \cf5 12\cf2 px;\
+    \}\
+    \
+    \cf6 .lang-btn\cf2  \{\
+      \cf4 padding\cf2 : \cf5 6\cf2 px \cf5 14\cf2 px;\
+      \cf4 border-radius\cf2 : \cf5 20\cf2 px;\
+      \cf4 border\cf2 : \cf5 1\cf2 px solid \cf7 var\cf2 (\cf7 --border\cf2 );\
+      \cf4 background\cf2 : none;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 font-size\cf2 : \cf5 12\cf2 px;\
+      \cf4 cursor\cf2 : pointer;\
+      \cf4 transition\cf2 : all \cf5 0.2\cf2 s;\
+    \}\
+    \
+    \cf6 .lang-btn:hover\cf2  \{\
+      \cf4 border-color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+    \}\
+    \
+    \cf6 .lang-btn.active\cf2  \{\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 border-color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 color\cf2 : white;\
+    \}\
+    \
+    \cf6 .typing-bubble\cf2  \{\
+      \cf4 display\cf2 : flex;\
+      \cf4 gap\cf2 : \cf5 4\cf2 px;\
+      \cf4 padding\cf2 : \cf5 14\cf2 px \cf5 18\cf2 px;\
+    \}\
+    \
+    \cf6 .typing-bubble .dot\cf2  \{\
+      \cf4 width\cf2 : \cf5 8\cf2 px;\
+      \cf4 height\cf2 : \cf5 8\cf2 px;\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 border-radius\cf2 : \cf5 50\cf2 %;\
+      \cf4 animation\cf2 : typing \cf5 1.4\cf2 s infinite;\
+    \}\
+    \
+    \cf6 .typing-bubble .dot:nth-child\cf2 (\cf6 2\cf2 ) \{ \cf4 animation-delay\cf2 : \cf5 0.2\cf2 s; \}\
+    \cf6 .typing-bubble .dot:nth-child\cf2 (\cf6 3\cf2 ) \{ \cf4 animation-delay\cf2 : \cf5 0.4\cf2 s; \}\
+    \
+    \cf5 @keyframes typing\cf2  \{\
+      \cf6 0%\cf2 ,\cf6  60%\cf2 ,\cf6  100%\cf2  \{ \cf4 transform\cf2 : \cf7 translateY\cf2 (\cf5 0\cf2 ); \cf4 opacity\cf2 : \cf5 0.4\cf2 ; \}\
+      \cf6 30%\cf2  \{ \cf4 transform\cf2 : \cf7 translateY\cf2 (\cf5 -6\cf2 px); \cf4 opacity\cf2 : \cf5 1\cf2 ; \}\
+    \}\
+    \
+    \cf6 .back-btn\cf2  \{\
+      \cf4 padding\cf2 : \cf5 8\cf2 px \cf5 16\cf2 px;\
+      \cf4 border-radius\cf2 : \cf5 20\cf2 px;\
+      \cf4 border\cf2 : \cf5 1\cf2 px solid \cf7 var\cf2 (\cf7 --border\cf2 );\
+      \cf4 background\cf2 : none;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 font-size\cf2 : \cf5 13\cf2 px;\
+      \cf4 cursor\cf2 : pointer;\
+      \cf4 margin-bottom\cf2 : \cf5 10\cf2 px;\
+      \cf4 transition\cf2 : all \cf5 0.2\cf2 s;\
+    \}\
+    \
+    \cf6 .back-btn:hover\cf2  \{\
+      \cf4 border-color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+    \}\
+    \
+    \cf8 /* Mode Toggle */\cf2 \
+    \cf6 .mode-toggle\cf2  \{\
+      \cf4 display\cf2 : flex;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 gap\cf2 : \cf5 10\cf2 px;\
+      \cf4 margin-bottom\cf2 : \cf5 20\cf2 px;\
+    \}\
+    \
+    \cf6 .mode-btn\cf2  \{\
+      \cf4 padding\cf2 : \cf5 10\cf2 px \cf5 20\cf2 px;\
+      \cf4 border-radius\cf2 : \cf5 25\cf2 px;\
+      \cf4 border\cf2 : \cf5 2\cf2 px solid \cf7 var\cf2 (\cf7 --border\cf2 );\
+      \cf4 background\cf2 : none;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 font-size\cf2 : \cf5 14\cf2 px;\
+      \cf4 cursor\cf2 : pointer;\
+      \cf4 transition\cf2 : all \cf5 0.2\cf2 s;\
+    \}\
+    \
+    \cf6 .mode-btn:hover\cf2  \{\
+      \cf4 border-color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+    \}\
+    \
+    \cf6 .mode-btn.active\cf2  \{\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 border-color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 color\cf2 : white;\
+    \}\
+    \
+    \cf8 /* Voice Interface */\cf2 \
+    \cf6 .voice-interface\cf2  \{\
+      \cf4 flex\cf2 : \cf5 1\cf2 ;\
+      \cf4 display\cf2 : flex;\
+      \cf4 flex-direction\cf2 : column;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 text-align\cf2 : center;\
+      \cf4 padding\cf2 : \cf5 40\cf2 px \cf5 20\cf2 px;\
+    \}\
+    \
+    \cf6 .voice-interface.hidden\cf2  \{ \cf4 display\cf2 : none; \}\
+    \
+    \cf6 .voice-status\cf2  \{\
+      \cf4 font-size\cf2 : \cf5 18\cf2 px;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --grey\cf2 );\
+      \cf4 margin-bottom\cf2 : \cf5 40\cf2 px;\
+      \cf4 min-height\cf2 : \cf5 30\cf2 px;\
+    \}\
+    \
+    \cf6 .voice-status.listening\cf2  \{ \cf4 color\cf2 : #059669; \cf4 font-weight\cf2 : \cf5 500\cf2 ; \}\
+    \cf6 .voice-status.processing\cf2  \{ \cf4 color\cf2 : #f59e0b; \}\
+    \cf6 .voice-status.speaking\cf2  \{ \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-teal\cf2 ); \}\
+    \cf6 .voice-status.error\cf2  \{ \cf4 color\cf2 : #dc2626; \}\
+    \
+    \cf6 .voice-main-btn\cf2  \{\
+      \cf4 width\cf2 : \cf5 120\cf2 px;\
+      \cf4 height\cf2 : \cf5 120\cf2 px;\
+      \cf4 border-radius\cf2 : \cf5 50\cf2 %;\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 border\cf2 : none;\
+      \cf4 cursor\cf2 : pointer;\
+      \cf4 display\cf2 : flex;\
+      \cf4 align-items\cf2 : center;\
+      \cf4 justify-content\cf2 : center;\
+      \cf4 transition\cf2 : all \cf5 0.3\cf2 s;\
+      \cf4 box-shadow\cf2 : \cf5 0\cf2  \cf5 8\cf2 px \cf5 30\cf2 px \cf7 rgba\cf2 (\cf5 13\cf2 , \cf5 61\cf2 , \cf5 77\cf2 , \cf5 0.3\cf2 );\
+    \}\
+    \
+    \cf6 .voice-main-btn:hover\cf2  \{\
+      \cf4 transform\cf2 : \cf7 scale\cf2 (\cf5 1.05\cf2 );\
+      \cf4 box-shadow\cf2 : \cf5 0\cf2  \cf5 12\cf2 px \cf5 40\cf2 px \cf7 rgba\cf2 (\cf5 13\cf2 , \cf5 61\cf2 , \cf5 77\cf2 , \cf5 0.4\cf2 );\
+    \}\
+    \
+    \cf6 .voice-main-btn svg\cf2  \{\
+      \cf4 width\cf2 : \cf5 50\cf2 px;\
+      \cf4 height\cf2 : \cf5 50\cf2 px;\
+      \cf4 color\cf2 : white;\
+    \}\
+    \
+    \cf6 .voice-main-btn.listening\cf2  \{\
+      \cf4 background\cf2 : #059669;\
+      \cf4 animation\cf2 : pulse-green \cf5 1.5\cf2 s infinite;\
+    \}\
+    \
+    \cf5 @keyframes pulse-green\cf2  \{\
+      \cf6 0%\cf2 ,\cf6  100%\cf2  \{ \cf4 box-shadow\cf2 : \cf5 0\cf2  \cf5 0\cf2  \cf5 0\cf2  \cf5 0\cf2  \cf7 rgba\cf2 (\cf5 5\cf2 , \cf5 150\cf2 , \cf5 105\cf2 , \cf5 0.5\cf2 ); \}\
+      \cf6 50%\cf2  \{ \cf4 box-shadow\cf2 : \cf5 0\cf2  \cf5 0\cf2  \cf5 0\cf2  \cf5 20\cf2 px \cf7 rgba\cf2 (\cf5 5\cf2 , \cf5 150\cf2 , \cf5 105\cf2 , \cf5 0\cf2 ); \}\
+    \}\
+    \
+    \cf6 .voice-main-btn.processing\cf2  \{\
+      \cf4 background\cf2 : #f59e0b;\
+      \cf4 animation\cf2 : pulse-orange \cf5 1.5\cf2 s infinite;\
+    \}\
+    \
+    \cf5 @keyframes pulse-orange\cf2  \{\
+      \cf6 0%\cf2 ,\cf6  100%\cf2  \{ \cf4 box-shadow\cf2 : \cf5 0\cf2  \cf5 0\cf2  \cf5 0\cf2  \cf5 0\cf2  \cf7 rgba\cf2 (\cf5 245\cf2 , \cf5 158\cf2 , \cf5 11\cf2 , \cf5 0.5\cf2 ); \}\
+      \cf6 50%\cf2  \{ \cf4 box-shadow\cf2 : \cf5 0\cf2  \cf5 0\cf2  \cf5 0\cf2  \cf5 20\cf2 px \cf7 rgba\cf2 (\cf5 245\cf2 , \cf5 158\cf2 , \cf5 11\cf2 , \cf5 0\cf2 ); \}\
+    \}\
+    \
+    \cf6 .voice-main-btn.speaking\cf2  \{\
+      \cf4 background\cf2 : \cf7 var\cf2 (\cf7 --istia-teal\cf2 );\
+      \cf4 animation\cf2 : pulse-teal \cf5 1.5\cf2 s infinite;\
+    \}\
+    \
+    \cf5 @keyframes pulse-teal\cf2  \{\
+      \cf6 0%\cf2 ,\cf6  100%\cf2  \{ \cf4 box-shadow\cf2 : \cf5 0\cf2  \cf5 0\cf2  \cf5 0\cf2  \cf5 0\cf2  \cf7 rgba\cf2 (\cf5 45\cf2 , \cf5 90\cf2 , \cf5 107\cf2 , \cf5 0.5\cf2 ); \}\
+      \cf6 50%\cf2  \{ \cf4 box-shadow\cf2 : \cf5 0\cf2  \cf5 0\cf2  \cf5 0\cf2  \cf5 20\cf2 px \cf7 rgba\cf2 (\cf5 45\cf2 , \cf5 90\cf2 , \cf5 107\cf2 , \cf5 0\cf2 ); \}\
+    \}\
+    \
+    \cf6 .voice-response\cf2  \{\
+      \cf4 margin-top\cf2 : \cf5 40\cf2 px;\
+      \cf4 max-width\cf2 : \cf5 500\cf2 px;\
+      \cf4 font-size\cf2 : \cf5 16\cf2 px;\
+      \cf4 line-height\cf2 : \cf5 1.7\cf2 ;\
+      \cf4 color\cf2 : \cf7 var\cf2 (\cf7 --istia-dark\cf2 );\
+      \cf4 min-height\cf2 : \cf5 100\cf2 px;\
+    \}\
+    \
+    \cf6 .voice-response img\cf2  \{\
+      \cf4 max-width\cf2 : \cf5 100\cf2 %;\
+      \cf4 border-radius\cf2 : \cf5 12\cf2 px;\
+      \cf4 margin\cf2 : \cf5 15\cf2 px \cf5 0\cf2 ;\
+    \}\
+    \
+    \cf6 .voice-lang-toggle\cf2  \{\
+      \cf4 display\cf2 : flex;\
+      \cf4 gap\cf2 : \cf5 10\cf2 px;\
+      \cf4 margin-top\cf2 : \cf5 30\cf2 px;\
+    \}\
+    \
+    \cf8 /* Text Interface */\cf2 \
+    \cf6 .text-interface\cf2  \{\
+      \cf4 flex\cf2 : \cf5 1\cf2 ;\
+      \cf4 display\cf2 : flex;\
+      \cf4 flex-direction\cf2 : column;\
+    \}\
+    \
+    \cf6 .text-interface.hidden\cf2  \{ \cf4 display\cf2 : none; \}\
+  </\cf4 style\cf2 >\
+</\cf4 head\cf2 >\
+<\cf4 body\cf2 >\
+  \cf8 <!-- PASSWORD MODAL -->\cf2 \
+  <\cf4 div \cf5 class\cf2 ="\cf6 modal-overlay\cf2 "\cf4  \cf5 id\cf2 ="\cf6 passwordModal\cf2 ">\
+    <\cf4 div \cf5 class\cf2 ="\cf6 login-container\cf2 ">\
+      <\cf4 div \cf5 class\cf2 ="\cf6 login-logo\cf2 ">\
+        <\cf4 svg \cf5 viewBox\cf2 ="\cf6 0 0 512 512\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 ">\
+          <\cf4 circle \cf5 cx\cf2 ="\cf6 175\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 190\cf2 "\cf4  \cf5 r\cf2 ="\cf6 160\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 #0d3d4d\cf2 "/>\
+          <\cf4 circle \cf5 cx\cf2 ="\cf6 320\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 335\cf2 "\cf4  \cf5 r\cf2 ="\cf6 160\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 #0d3d4d\cf2 "/>\
+          <\cf4 clipPath \cf5 id\cf2 ="\cf6 clipLogin\cf2 ">\
+            <\cf4 circle \cf5 cx\cf2 ="\cf6 175\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 190\cf2 "\cf4  \cf5 r\cf2 ="\cf6 160\cf2 "/>\
+          </\cf4 clipPath\cf2 >\
+          <\cf4 circle \cf5 cx\cf2 ="\cf6 320\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 335\cf2 "\cf4  \cf5 r\cf2 ="\cf6 160\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 white\cf2 "\cf4  \cf5 clip-path\cf2 ="\cf6 url(#clipLogin)\cf2 "/>\
+          <\cf4 circle \cf5 cx\cf2 ="\cf6 450\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 75\cf2 "\cf4  \cf5 r\cf2 ="\cf6 40\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 #0d3d4d\cf2 "/>\
+          <\cf4 circle \cf5 cx\cf2 ="\cf6 60\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 435\cf2 "\cf4  \cf5 r\cf2 ="\cf6 32\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 #0d3d4d\cf2 "/>\
+        </\cf4 svg\cf2 >\
+        <\cf4 span \cf5 class\cf2 ="\cf6 login-logo-text\cf2 ">Bo Agent</\cf4 span\cf2 >\
+      </\cf4 div\cf2 >\
+      <\cf4 p \cf5 class\cf2 ="\cf6 login-subtitle\cf2 ">AI Warehouse Assistant</\cf4 p\cf2 >\
+      \
+      <\cf4 h1 \cf5 class\cf2 ="\cf6 login-title\cf2 ">Access Demo</\cf4 h1\cf2 >\
+      <\cf4 p \cf5 class\cf2 ="\cf6 login-desc\cf2 ">Enter the password to try Bo Agent</\cf4 p\cf2 >\
+      \
+      <\cf4 div \cf5 class\cf2 ="\cf6 login-input-group\cf2 ">\
+        <\cf4 input \cf5 type\cf2 ="\cf6 password\cf2 "\cf4  \cf5 class\cf2 ="\cf6 login-input\cf2 "\cf4  \cf5 id\cf2 ="\cf6 passwordInput\cf2 "\cf4  \cf5 placeholder\cf2 ="\cf6 Enter password\cf2 "\cf4  \cf5 autocomplete\cf2 ="\cf6 off\cf2 ">\
+        <\cf4 button \cf5 class\cf2 ="\cf6 toggle-password\cf2 "\cf4  \cf5 onclick\cf2 ="\cf6 togglePassword()\cf2 ">\
+          <\cf4 svg \cf5 width\cf2 ="\cf6 20\cf2 "\cf4  \cf5 height\cf2 ="\cf6 20\cf2 "\cf4  \cf5 viewBox\cf2 ="\cf6 0 0 24 24\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 stroke\cf2 ="\cf6 currentColor\cf2 "\cf4  \cf5 stroke-width\cf2 ="\cf6 2\cf2 ">\
+            <\cf4 path \cf5 d\cf2 ="\cf6 M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\cf2 "/>\
+            <\cf4 circle \cf5 cx\cf2 ="\cf6 12\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 12\cf2 "\cf4  \cf5 r\cf2 ="\cf6 3\cf2 "/>\
+          </\cf4 svg\cf2 >\
+        </\cf4 button\cf2 >\
+      </\cf4 div\cf2 >\
+      \
+      <\cf4 button \cf5 class\cf2 ="\cf6 login-btn\cf2 "\cf4  \cf5 onclick\cf2 ="\cf6 checkPassword()\cf2 ">Access Demo</\cf4 button\cf2 >\
+      <\cf4 button \cf5 class\cf2 ="\cf6 cancel-btn\cf2 "\cf4  \cf5 onclick\cf2 ="\cf6 closeModal()\cf2 ">Cancel</\cf4 button\cf2 >\
+      \
+      <\cf4 p \cf5 class\cf2 ="\cf6 login-error\cf2 "\cf4  \cf5 id\cf2 ="\cf6 loginError\cf2 "></\cf4 p\cf2 >\
+      \
+      <\cf4 div \cf5 class\cf2 ="\cf6 login-footer\cf2 ">\
+        <\cf4 p\cf2 >Quynh Hoang \'95 Patrick Bom</\cf4 p\cf2 >\
+      </\cf4 div\cf2 >\
+    </\cf4 div\cf2 >\
+  </\cf4 div\cf2 >\
+\
+  \cf8 <!-- MAIN APP -->\cf2 \
+  <\cf4 div \cf5 class\cf2 ="\cf6 main-app active\cf2 "\cf4  \cf5 id\cf2 ="\cf6 mainApp\cf2 ">\
+    <\cf4 header \cf5 class\cf2 ="\cf6 header\cf2 ">\
+      <\cf4 div \cf5 class\cf2 ="\cf6 logo\cf2 "\cf4  \cf5 onclick\cf2 ="\cf6 showIntro()\cf2 ">\
+        <\cf4 svg \cf5 class\cf2 ="\cf6 logo-icon\cf2 "\cf4  \cf5 viewBox\cf2 ="\cf6 0 0 512 512\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 style\cf2 ="\cf6 width:36px;height:36px;\cf2 ">\
+          <\cf4 circle \cf5 cx\cf2 ="\cf6 175\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 190\cf2 "\cf4  \cf5 r\cf2 ="\cf6 160\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 #0d3d4d\cf2 "/>\
+          <\cf4 circle \cf5 cx\cf2 ="\cf6 320\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 335\cf2 "\cf4  \cf5 r\cf2 ="\cf6 160\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 #0d3d4d\cf2 "/>\
+          <\cf4 clipPath \cf5 id\cf2 ="\cf6 clip1\cf2 ">\
+            <\cf4 circle \cf5 cx\cf2 ="\cf6 175\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 190\cf2 "\cf4  \cf5 r\cf2 ="\cf6 160\cf2 "/>\
+          </\cf4 clipPath\cf2 >\
+          <\cf4 circle \cf5 cx\cf2 ="\cf6 320\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 335\cf2 "\cf4  \cf5 r\cf2 ="\cf6 160\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 white\cf2 "\cf4  \cf5 clip-path\cf2 ="\cf6 url(#clip1)\cf2 "/>\
+          <\cf4 circle \cf5 cx\cf2 ="\cf6 450\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 75\cf2 "\cf4  \cf5 r\cf2 ="\cf6 40\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 #0d3d4d\cf2 "/>\
+          <\cf4 circle \cf5 cx\cf2 ="\cf6 60\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 435\cf2 "\cf4  \cf5 r\cf2 ="\cf6 32\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 #0d3d4d\cf2 "/>\
+        </\cf4 svg\cf2 >\
+        <\cf4 span \cf5 class\cf2 ="\cf6 logo-name\cf2 ">Istia</\cf4 span\cf2 >\
+        <\cf4 span \cf5 class\cf2 ="\cf6 logo-tagline\cf2 ">Your warehouse<\cf4 br\cf2 >automation guide</\cf4 span\cf2 >\
+      </\cf4 div\cf2 >\
+      <\cf4 div \cf5 class\cf2 ="\cf6 header-right\cf2 ">\
+        <\cf4 div \cf5 class\cf2 ="\cf6 menu-icon\cf2 ">\
+          <\cf4 span\cf2 ></\cf4 span\cf2 >\
+          <\cf4 span\cf2 ></\cf4 span\cf2 >\
+          <\cf4 span\cf2 ></\cf4 span\cf2 >\
+        </\cf4 div\cf2 >\
+      </\cf4 div\cf2 >\
+    </\cf4 header\cf2 >\
+    \
+    \cf8 <!-- INTRO PAGE -->\cf2 \
+    <\cf4 div \cf5 class\cf2 ="\cf6 intro-page\cf2 "\cf4  \cf5 id\cf2 ="\cf6 introPage\cf2 ">\
+      <\cf4 div \cf5 class\cf2 ="\cf6 container\cf2 ">\
+        <\cf4 section\cf2 >\
+          <\cf4 div \cf5 class\cf2 ="\cf6 section-title\cf2 ">\
+            <\cf4 h2\cf2 >About Bo</\cf4 h2\cf2 >\
+            <\cf4 p\cf2 >Bo is an AI-powered assistant that consolidates warehouse data into one conversational interface. Based on customer pain points identified through warehouse interviews, Bo is designed to streamline operations by providing instant access to critical data and intelligent analysis.</\cf4 p\cf2 >\
+          </\cf4 div\cf2 >\
+          \
+          <\cf4 div \cf5 class\cf2 ="\cf6 cards-grid\cf2 ">\
+            <\cf4 div \cf5 class\cf2 ="\cf6 card\cf2 ">\
+              <\cf4 div \cf5 class\cf2 ="\cf6 card-icon\cf2 ">\
+                <\cf4 svg \cf5 viewBox\cf2 ="\cf6 0 0 24 24\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 stroke\cf2 ="\cf6 currentColor\cf2 "\cf4  \cf5 stroke-width\cf2 ="\cf6 2\cf2 ">\
+                  <\cf4 rect \cf5 x\cf2 ="\cf6 3\cf2 "\cf4  \cf5 y\cf2 ="\cf6 3\cf2 "\cf4  \cf5 width\cf2 ="\cf6 7\cf2 "\cf4  \cf5 height\cf2 ="\cf6 7\cf2 "\cf4  \cf5 rx\cf2 ="\cf6 1\cf2 "/>\
+                  <\cf4 rect \cf5 x\cf2 ="\cf6 14\cf2 "\cf4  \cf5 y\cf2 ="\cf6 3\cf2 "\cf4  \cf5 width\cf2 ="\cf6 7\cf2 "\cf4  \cf5 height\cf2 ="\cf6 7\cf2 "\cf4  \cf5 rx\cf2 ="\cf6 1\cf2 "/>\
+                  <\cf4 rect \cf5 x\cf2 ="\cf6 3\cf2 "\cf4  \cf5 y\cf2 ="\cf6 14\cf2 "\cf4  \cf5 width\cf2 ="\cf6 7\cf2 "\cf4  \cf5 height\cf2 ="\cf6 7\cf2 "\cf4  \cf5 rx\cf2 ="\cf6 1\cf2 "/>\
+                  <\cf4 rect \cf5 x\cf2 ="\cf6 14\cf2 "\cf4  \cf5 y\cf2 ="\cf6 14\cf2 "\cf4  \cf5 width\cf2 ="\cf6 7\cf2 "\cf4  \cf5 height\cf2 ="\cf6 7\cf2 "\cf4  \cf5 rx\cf2 ="\cf6 1\cf2 "/>\
+                </\cf4 svg\cf2 >\
+              </\cf4 div\cf2 >\
+              <\cf4 h3\cf2 >Data Consolidation</\cf4 h3\cf2 >\
+              <\cf4 p\cf2 >Aggregate information from multiple WMS screens into one unified view, eliminating the need to navigate between systems.</\cf4 p\cf2 >\
+            </\cf4 div\cf2 >\
+            \
+            <\cf4 div \cf5 class\cf2 ="\cf6 card\cf2 ">\
+              <\cf4 div \cf5 class\cf2 ="\cf6 card-icon\cf2 ">\
+                <\cf4 svg \cf5 viewBox\cf2 ="\cf6 0 0 24 24\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 stroke\cf2 ="\cf6 currentColor\cf2 "\cf4  \cf5 stroke-width\cf2 ="\cf6 2\cf2 ">\
+                  <\cf4 path \cf5 d\cf2 ="\cf6 M21 21H4.6c-.6 0-.9 0-1.1-.1a1 1 0 0 1-.4-.4c-.1-.2-.1-.5-.1-1.1V3\cf2 "/>\
+                  <\cf4 path \cf5 d\cf2 ="\cf6 m7 14 4-4 4 4 6-6\cf2 "/>\
+                </\cf4 svg\cf2 >\
+              </\cf4 div\cf2 >\
+              <\cf4 h3\cf2 >Performance Analytics</\cf4 h3\cf2 >\
+              <\cf4 p\cf2 >Generate visual charts and graphs to track operational KPIs, task completion rates, and warehouse efficiency metrics.</\cf4 p\cf2 >\
+            </\cf4 div\cf2 >\
+            \
+            <\cf4 div \cf5 class\cf2 ="\cf6 card\cf2 ">\
+              <\cf4 div \cf5 class\cf2 ="\cf6 card-icon\cf2 ">\
+                <\cf4 svg \cf5 viewBox\cf2 ="\cf6 0 0 24 24\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 stroke\cf2 ="\cf6 currentColor\cf2 "\cf4  \cf5 stroke-width\cf2 ="\cf6 2\cf2 ">\
+                  <\cf4 circle \cf5 cx\cf2 ="\cf6 12\cf2 "\cf4  \cf5 cy\cf2 ="\cf6 8\cf2 "\cf4  \cf5 r\cf2 ="\cf6 4\cf2 "/>\
+                  <\cf4 path \cf5 d\cf2 ="\cf6 M4 20c0-4 4-6 8-6s8 2 8 6\cf2 "/>\
+                </\cf4 svg\cf2 >\
+              </\cf4 div\cf2 >\
+              <\cf4 h3\cf2 >Employee Performance</\cf4 h3\cf2 >\
+              <\cf4 p\cf2 >Utilize algorithms to analyze individual employee productivity, task progress, and completion times for better workforce management.</\cf4 p\cf2 >\
+            </\cf4 div\cf2 >\
+            \
+            <\cf4 div \cf5 class\cf2 ="\cf6 card\cf2 ">\
+              <\cf4 div \cf5 class\cf2 ="\cf6 card-icon\cf2 ">\
+                <\cf4 svg \cf5 viewBox\cf2 ="\cf6 0 0 24 24\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 stroke\cf2 ="\cf6 currentColor\cf2 "\cf4  \cf5 stroke-width\cf2 ="\cf6 2\cf2 ">\
+                  <\cf4 rect \cf5 x\cf2 ="\cf6 2\cf2 "\cf4  \cf5 y\cf2 ="\cf6 7\cf2 "\cf4  \cf5 width\cf2 ="\cf6 20\cf2 "\cf4  \cf5 height\cf2 ="\cf6 14\cf2 "\cf4  \cf5 rx\cf2 ="\cf6 2\cf2 "/>\
+                  <\cf4 path \cf5 d\cf2 ="\cf6 M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2\cf2 "/>\
+                  <\cf4 path \cf5 d\cf2 ="\cf6 M12 12v4\cf2 "/>\
+                  <\cf4 path \cf5 d\cf2 ="\cf6 M2 12h20\cf2 "/>\
+                </\cf4 svg\cf2 >\
+              </\cf4 div\cf2 >\
+              <\cf4 h3\cf2 >Order Tracking</\cf4 h3\cf2 >\
+              <\cf4 p\cf2 >Instantly retrieve order status, delivery conditions, quantities, and product information through natural conversation.</\cf4 p\cf2 >\
+            </\cf4 div\cf2 >\
+          </\cf4 div\cf2 >\
+        </\cf4 section\cf2 >\
+        \
+        <\cf4 section \cf5 class\cf2 ="\cf6 features\cf2 ">\
+          <\cf4 div \cf5 class\cf2 ="\cf6 section-title\cf2 ">\
+            <\cf4 h2\cf2 >Key Capabilities</\cf4 h2\cf2 >\
+            <\cf4 p\cf2 >Bo combines conversational AI with powerful data analysis to deliver actionable insights.</\cf4 p\cf2 >\
+          </\cf4 div\cf2 >\
+          \
+          <\cf4 div \cf5 class\cf2 ="\cf6 feature-cards\cf2 ">\
+            <\cf4 div \cf5 class\cf2 ="\cf6 feature-card\cf2 ">\
+              <\cf4 div \cf5 class\cf2 ="\cf6 feature-icon\cf2 ">\
+                <\cf4 svg \cf5 viewBox\cf2 ="\cf6 0 0 24 24\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 stroke\cf2 ="\cf6 currentColor\cf2 "\cf4  \cf5 stroke-width\cf2 ="\cf6 2\cf2 ">\
+                  <\cf4 path \cf5 d\cf2 ="\cf6 M3 3v18h18\cf2 "/>\
+                  <\cf4 rect \cf5 x\cf2 ="\cf6 7\cf2 "\cf4  \cf5 y\cf2 ="\cf6 10\cf2 "\cf4  \cf5 width\cf2 ="\cf6 3\cf2 "\cf4  \cf5 height\cf2 ="\cf6 8\cf2 "/>\
+                  <\cf4 rect \cf5 x\cf2 ="\cf6 12\cf2 "\cf4  \cf5 y\cf2 ="\cf6 6\cf2 "\cf4  \cf5 width\cf2 ="\cf6 3\cf2 "\cf4  \cf5 height\cf2 ="\cf6 12\cf2 "/>\
+                  <\cf4 rect \cf5 x\cf2 ="\cf6 17\cf2 "\cf4  \cf5 y\cf2 ="\cf6 12\cf2 "\cf4  \cf5 width\cf2 ="\cf6 3\cf2 "\cf4  \cf5 height\cf2 ="\cf6 6\cf2 "/>\
+                </\cf4 svg\cf2 >\
+              </\cf4 div\cf2 >\
+              <\cf4 div \cf5 class\cf2 ="\cf6 feature-content\cf2 ">\
+                <\cf4 h4\cf2 >Interactive Charts</\cf4 h4\cf2 >\
+                <\cf4 p\cf2 >Visualize performance data with dynamic bar charts, line graphs, and progress indicators generated on demand.</\cf4 p\cf2 >\
+              </\cf4 div\cf2 >\
+            </\cf4 div\cf2 >\
+            \
+            <\cf4 div \cf5 class\cf2 ="\cf6 feature-card\cf2 ">\
+              <\cf4 div \cf5 class\cf2 ="\cf6 feature-icon\cf2 ">\
+                <\cf4 svg \cf5 viewBox\cf2 ="\cf6 0 0 24 24\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 stroke\cf2 ="\cf6 currentColor\cf2 "\cf4  \cf5 stroke-width\cf2 ="\cf6 2\cf2 ">\
+                  <\cf4 path \cf5 d\cf2 ="\cf6 M12 20V10\cf2 "/>\
+                  <\cf4 path \cf5 d\cf2 ="\cf6 M18 20V4\cf2 "/>\
+                  <\cf4 path \cf5 d\cf2 ="\cf6 M6 20v-4\cf2 "/>\
+                </\cf4 svg\cf2 >\
+              </\cf4 div\cf2 >\
+              <\cf4 div \cf5 class\cf2 ="\cf6 feature-content\cf2 ">\
+                <\cf4 h4\cf2 >Algorithm-Based Analysis</\cf4 h4\cf2 >\
+                <\cf4 p\cf2 >Smart algorithms calculate employee efficiency scores based on task completion speed and accuracy.</\cf4 p\cf2 >\
+              </\cf4 div\cf2 >\
+            </\cf4 div\cf2 >\
+            \
+            <\cf4 div \cf5 class\cf2 ="\cf6 feature-card\cf2 ">\
+              <\cf4 div \cf5 class\cf2 ="\cf6 feature-icon\cf2 ">\
+                <\cf4 svg \cf5 viewBox\cf2 ="\cf6 0 0 24 24\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 stroke\cf2 ="\cf6 currentColor\cf2 "\cf4  \cf5 stroke-width\cf2 ="\cf6 2\cf2 ">\
+                  <\cf4 path \cf5 d\cf2 ="\cf6 M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\cf2 "/>\
+                </\cf4 svg\cf2 >\
+              </\cf4 div\cf2 >\
+              <\cf4 div \cf5 class\cf2 ="\cf6 feature-content\cf2 ">\
+                <\cf4 h4\cf2 >Natural Language Interface</\cf4 h4\cf2 >\
+                <\cf4 p\cf2 >Communicate with Bo through text input to get instant answers about warehouse operations. Voice input is also available when needed.</\cf4 p\cf2 >\
+              </\cf4 div\cf2 >\
+            </\cf4 div\cf2 >\
+            \
+            <\cf4 div \cf5 class\cf2 ="\cf6 feature-card\cf2 ">\
+              <\cf4 div \cf5 class\cf2 ="\cf6 feature-icon\cf2 ">\
+                <\cf4 svg \cf5 viewBox\cf2 ="\cf6 0 0 24 24\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 stroke\cf2 ="\cf6 currentColor\cf2 "\cf4  \cf5 stroke-width\cf2 ="\cf6 2\cf2 ">\
+                  <\cf4 path \cf5 d\cf2 ="\cf6 M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\cf2 "/>\
+                  <\cf4 polyline \cf5 points\cf2 ="\cf6 14 2 14 8 20 8\cf2 "/>\
+                  <\cf4 line \cf5 x1\cf2 ="\cf6 16\cf2 "\cf4  \cf5 y1\cf2 ="\cf6 13\cf2 "\cf4  \cf5 x2\cf2 ="\cf6 8\cf2 "\cf4  \cf5 y2\cf2 ="\cf6 13\cf2 "/>\
+                  <\cf4 line \cf5 x1\cf2 ="\cf6 16\cf2 "\cf4  \cf5 y1\cf2 ="\cf6 17\cf2 "\cf4  \cf5 x2\cf2 ="\cf6 8\cf2 "\cf4  \cf5 y2\cf2 ="\cf6 17\cf2 "/>\
+                </\cf4 svg\cf2 >\
+              </\cf4 div\cf2 >\
+              <\cf4 div \cf5 class\cf2 ="\cf6 feature-content\cf2 ">\
+                <\cf4 h4\cf2 >Business Rules Explanation</\cf4 h4\cf2 >\
+                <\cf4 p\cf2 >Understand why the system made certain decisions. Bo explains warehouse business rules and logic in simple terms.</\cf4 p\cf2 >\
+              </\cf4 div\cf2 >\
+            </\cf4 div\cf2 >\
+          </\cf4 div\cf2 >\
+        </\cf4 section\cf2 >\
+        \
+        <\cf4 section \cf5 class\cf2 ="\cf6 data-section\cf2 ">\
+          <\cf4 h3\cf2 >Data Points Bo Can Access</\cf4 h3\cf2 >\
+          <\cf4 div \cf5 class\cf2 ="\cf6 data-tags\cf2 ">\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">OrderNumber</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">OrderLine</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">DeliveryCondition</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">ProductCode</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">QuantityOrder</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">TaskUser</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">TaskProgress</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">TaskCompleted</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">LocationFrom</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">LocationTo</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">ZonesInTour</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">Distance</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">CarriersFilled</\cf4 span\cf2 >\
+            <\cf4 span \cf5 class\cf2 ="\cf6 data-tag\cf2 ">TourInfo</\cf4 span\cf2 >\
+          </\cf4 div\cf2 >\
+        </\cf4 section\cf2 >\
+        \
+        <\cf4 div \cf5 class\cf2 ="\cf6 cta\cf2 ">\
+          <\cf4 button \cf5 class\cf2 ="\cf6 cta-btn\cf2 "\cf4  \cf5 onclick\cf2 ="\cf6 showChat()\cf2 ">Try Bo Agent 
+\f1 \uc0\u8594 
+\f0 </\cf4 button\cf2 >\
+        </\cf4 div\cf2 >\
+      </\cf4 div\cf2 >\
+    </\cf4 div\cf2 >\
+    \
+    \cf8 <!-- CHAT PAGE -->\cf2 \
+    <\cf4 div \cf5 class\cf2 ="\cf6 chat-page\cf2 "\cf4  \cf5 id\cf2 ="\cf6 chatPage\cf2 ">\
+      <\cf4 button \cf5 class\cf2 ="\cf6 back-btn\cf2 "\cf4  \cf5 onclick\cf2 ="\cf6 showIntro()\cf2 ">
+\f1 \uc0\u8592 
+\f0  Back to About</\cf4 button\cf2 >\
+      \
+      \cf8 <!-- Voice Mode Toggle -->\cf2 \
+      <\cf4 div \cf5 class\cf2 ="\cf6 mode-toggle\cf2 ">\
+        <\cf4 button \cf5 class\cf2 ="\cf6 mode-btn active\cf2 "\cf4  \cf5 id\cf2 ="\cf6 voiceModeBtn\cf2 "\cf4  \cf5 onclick\cf2 ="\cf6 setMode('voice')\cf2 ">Voice Mode</\cf4 button\cf2 >\
+        <\cf4 button \cf5 class\cf2 ="\cf6 mode-btn\cf2 "\cf4  \cf5 id\cf2 ="\cf6 textModeBtn\cf2 "\cf4  \cf5 onclick\cf2 ="\cf6 setMode('text')\cf2 ">Text Mode</\cf4 button\cf2 >\
+      </\cf4 div\cf2 >\
+      \
+      \cf8 <!-- Voice Interface -->\cf2 \
+      <\cf4 div \cf5 class\cf2 ="\cf6 voice-interface\cf2 "\cf4  \cf5 id\cf2 ="\cf6 voiceInterface\cf2 ">\
+        <\cf4 div \cf5 class\cf2 ="\cf6 voice-status\cf2 "\cf4  \cf5 id\cf2 ="\cf6 voiceStatus\cf2 ">Tap the microphone to start</\cf4 div\cf2 >\
+        \
+        <\cf4 button \cf5 class\cf2 ="\cf6 voice-main-btn\cf2 "\cf4  \cf5 id\cf2 ="\cf6 voiceMainBtn\cf2 ">\
+          <\cf4 svg \cf5 viewBox\cf2 ="\cf6 0 0 24 24\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 stroke\cf2 ="\cf6 currentColor\cf2 "\cf4  \cf5 stroke-width\cf2 ="\cf6 2\cf2 ">\
+            <\cf4 rect \cf5 x\cf2 ="\cf6 9\cf2 "\cf4  \cf5 y\cf2 ="\cf6 2\cf2 "\cf4  \cf5 width\cf2 ="\cf6 6\cf2 "\cf4  \cf5 height\cf2 ="\cf6 12\cf2 "\cf4  \cf5 rx\cf2 ="\cf6 3\cf2 "/>\
+            <\cf4 path \cf5 d\cf2 ="\cf6 M5 10a7 7 0 0 0 14 0\cf2 "/>\
+            <\cf4 line \cf5 x1\cf2 ="\cf6 12\cf2 "\cf4  \cf5 y1\cf2 ="\cf6 19\cf2 "\cf4  \cf5 x2\cf2 ="\cf6 12\cf2 "\cf4  \cf5 y2\cf2 ="\cf6 22\cf2 "/>\
+          </\cf4 svg\cf2 >\
+        </\cf4 button\cf2 >\
+        \
+        <\cf4 div \cf5 class\cf2 ="\cf6 voice-response\cf2 "\cf4  \cf5 id\cf2 ="\cf6 voiceResponse\cf2 "></\cf4 div\cf2 >\
+        \
+        <\cf4 div \cf5 class\cf2 ="\cf6 voice-lang-toggle\cf2 ">\
+          <\cf4 button \cf5 class\cf2 ="\cf6 lang-btn active\cf2 "\cf4  \cf5 data-lang\cf2 ="\cf6 en-US\cf2 ">
+\f2 \uc0\u55356 \u56812 \u55356 \u56807 
+\f0  EN</\cf4 button\cf2 >\
+          <\cf4 button \cf5 class\cf2 ="\cf6 lang-btn\cf2 "\cf4  \cf5 data-lang\cf2 ="\cf6 nl-NL\cf2 ">
+\f2 \uc0\u55356 \u56819 \u55356 \u56817 
+\f0  NL</\cf4 button\cf2 >\
+        </\cf4 div\cf2 >\
+      </\cf4 div\cf2 >\
+      \
+      \cf8 <!-- Text Interface (hidden by default) -->\cf2 \
+      <\cf4 div \cf5 class\cf2 ="\cf6 text-interface hidden\cf2 "\cf4  \cf5 id\cf2 ="\cf6 textInterface\cf2 ">\
+        <\cf4 div \cf5 class\cf2 ="\cf6 welcome-section\cf2 "\cf4  \cf5 id\cf2 ="\cf6 welcomeSection\cf2 ">\
+          <\cf4 div \cf5 class\cf2 ="\cf6 welcome-text\cf2 ">How can I help you?</\cf4 div\cf2 >\
+        </\cf4 div\cf2 >\
+        \
+        <\cf4 div \cf5 class\cf2 ="\cf6 chat-area\cf2 "\cf4  \cf5 id\cf2 ="\cf6 chat\cf2 "></\cf4 div\cf2 >\
+        \
+        <\cf4 div \cf5 class\cf2 ="\cf6 input-container\cf2 ">\
+          <\cf4 div \cf5 class\cf2 ="\cf6 input-bar\cf2 ">\
+            <\cf4 input \cf5 type\cf2 ="\cf6 text\cf2 "\cf4  \cf5 id\cf2 ="\cf6 textInput\cf2 "\cf4  \cf5 placeholder\cf2 ="\cf6 Ask anything about warehouse data...\cf2 "\cf4  \cf2 />\
+            <\cf4 button \cf5 class\cf2 ="\cf6 mic-btn\cf2 "\cf4  \cf5 id\cf2 ="\cf6 micBtn\cf2 ">\
+              <\cf4 svg \cf5 viewBox\cf2 ="\cf6 0 0 24 24\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 stroke\cf2 ="\cf6 currentColor\cf2 "\cf4  \cf5 stroke-width\cf2 ="\cf6 2\cf2 ">\
+                <\cf4 rect \cf5 x\cf2 ="\cf6 9\cf2 "\cf4  \cf5 y\cf2 ="\cf6 2\cf2 "\cf4  \cf5 width\cf2 ="\cf6 6\cf2 "\cf4  \cf5 height\cf2 ="\cf6 12\cf2 "\cf4  \cf5 rx\cf2 ="\cf6 3\cf2 "/>\
+                <\cf4 path \cf5 d\cf2 ="\cf6 M5 10a7 7 0 0 0 14 0\cf2 "/>\
+                <\cf4 line \cf5 x1\cf2 ="\cf6 12\cf2 "\cf4  \cf5 y1\cf2 ="\cf6 19\cf2 "\cf4  \cf5 x2\cf2 ="\cf6 12\cf2 "\cf4  \cf5 y2\cf2 ="\cf6 22\cf2 "/>\
+              </\cf4 svg\cf2 >\
+            </\cf4 button\cf2 >\
+            <\cf4 button \cf5 class\cf2 ="\cf6 send-btn\cf2 "\cf4  \cf5 onclick\cf2 ="\cf6 sendMessage()\cf2 ">\
+              <\cf4 svg \cf5 viewBox\cf2 ="\cf6 0 0 24 24\cf2 "\cf4  \cf5 fill\cf2 ="\cf6 none\cf2 "\cf4  \cf5 stroke\cf2 ="\cf6 currentColor\cf2 "\cf4  \cf5 stroke-width\cf2 ="\cf6 2\cf2 ">\
+                <\cf4 line \cf5 x1\cf2 ="\cf6 22\cf2 "\cf4  \cf5 y1\cf2 ="\cf6 2\cf2 "\cf4  \cf5 x2\cf2 ="\cf6 11\cf2 "\cf4  \cf5 y2\cf2 ="\cf6 13\cf2 "/>\
+                <\cf4 polygon \cf5 points\cf2 ="\cf6 22 2 15 22 11 13 2 9 22 2\cf2 "/>\
+              </\cf4 svg\cf2 >\
+            </\cf4 button\cf2 >\
+          </\cf4 div\cf2 >\
+          <\cf4 div \cf5 class\cf2 ="\cf6 status\cf2 "\cf4  \cf5 id\cf2 ="\cf6 status\cf2 "></\cf4 div\cf2 >\
+          <\cf4 div \cf5 class\cf2 ="\cf6 lang-toggle\cf2 ">\
+            <\cf4 button \cf5 class\cf2 ="\cf6 lang-btn active\cf2 "\cf4  \cf5 data-lang\cf2 ="\cf6 en-US\cf2 ">
+\f2 \uc0\u55356 \u56812 \u55356 \u56807 
+\f0  EN</\cf4 button\cf2 >\
+            <\cf4 button \cf5 class\cf2 ="\cf6 lang-btn\cf2 "\cf4  \cf5 data-lang\cf2 ="\cf6 nl-NL\cf2 ">
+\f2 \uc0\u55356 \u56819 \u55356 \u56817 
+\f0  NL</\cf4 button\cf2 >\
+          </\cf4 div\cf2 >\
+        </\cf4 div\cf2 >\
+      </\cf4 div\cf2 >\
+    </\cf4 div\cf2 >\
+  </\cf4 div\cf2 >\
+\
+<\cf4 script\cf2 >\
+\cf8 // ============== PASSWORD CONFIG ==============\cf2 \
+\cf8 // Change this password to whatever you want\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf9 const\cf2  \cf5 DEMO_PASSWORD\cf2  \cf7 =\cf2  \cf6 'Istia2026@n8n'\cf2 ;\
+\pard\pardeftab720\partightenfactor0
+\cf8 // =============================================\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf9 const\cf2  \cf5 WEBHOOK_URL\cf2  \cf7 =\cf2  \cf6 'https://istiasoftware.app.n8n.cloud/webhook/fccad074-5229-420d-9ef3-a5cb2bce6f3b/chat'\cf2 ;\
+\cf9 let\cf2  \cf5 LANG\cf2  \cf7 =\cf2  \cf6 'en-US'\cf2 ;\
+\cf9 let\cf2  currentMode \cf7 =\cf2  \cf6 'voice'\cf2 ;\
+\
+\pard\pardeftab720\partightenfactor0
+\cf8 // DOM Elements\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf9 const\cf2  passwordModal \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'passwordModal'\cf2 );\
+\cf9 const\cf2  passwordInput \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'passwordInput'\cf2 );\
+\cf9 const\cf2  loginError \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'loginError'\cf2 );\
+\cf9 const\cf2  introPage \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'introPage'\cf2 );\
+\cf9 const\cf2  chatPage \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'chatPage'\cf2 );\
+\cf9 const\cf2  voiceInterface \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'voiceInterface'\cf2 );\
+\cf9 const\cf2  textInterface \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'textInterface'\cf2 );\
+\cf9 const\cf2  voiceMainBtn \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'voiceMainBtn'\cf2 );\
+\cf9 const\cf2  voiceStatus \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'voiceStatus'\cf2 );\
+\cf9 const\cf2  voiceResponse \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'voiceResponse'\cf2 );\
+\cf9 const\cf2  chat \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'chat'\cf2 );\
+\cf9 const\cf2  welcomeSection \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'welcomeSection'\cf2 );\
+\cf9 const\cf2  status \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'status'\cf2 );\
+\cf9 const\cf2  textInput \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'textInput'\cf2 );\
+\cf9 const\cf2  micBtn \cf7 =\cf2  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'micBtn'\cf2 );\
+\
+\pard\pardeftab720\partightenfactor0
+\cf8 // Check if already authenticated this session\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf9 let\cf2  isAuthenticated \cf7 =\cf2  \cf7 sessionStorage\cf2 .\cf7 getItem\cf2 (\cf6 'boAgentAuth'\cf2 ) \cf7 ===\cf2  \cf6 'true'\cf2 ;\
+\
+\pard\pardeftab720\partightenfactor0
+\cf8 // Login functions\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf9 function\cf2  \cf7 showPasswordModal\cf2 () \{\
+  passwordModal.classList.\cf7 add\cf2 (\cf6 'active'\cf2 );\
+  passwordInput.\cf7 focus\cf2 ();\
+\}\
+\
+\cf9 function\cf2  \cf7 closeModal\cf2 () \{\
+  passwordModal.classList.\cf7 remove\cf2 (\cf6 'active'\cf2 );\
+  passwordInput.value \cf7 =\cf2  \cf6 ''\cf2 ;\
+  loginError.textContent \cf7 =\cf2  \cf6 ''\cf2 ;\
+\}\
+\
+\cf9 function\cf2  \cf7 checkPassword\cf2 () \{\
+  \cf9 const\cf2  entered \cf7 =\cf2  passwordInput.value;\
+  \cf9 if\cf2  (entered \cf7 ===\cf2  \cf5 DEMO_PASSWORD\cf2 ) \{\
+    \cf7 sessionStorage\cf2 .\cf7 setItem\cf2 (\cf6 'boAgentAuth'\cf2 , \cf6 'true'\cf2 );\
+    isAuthenticated \cf7 =\cf2  \cf5 true\cf2 ;\
+    \cf7 closeModal\cf2 ();\
+    introPage.classList.\cf7 add\cf2 (\cf6 'hidden'\cf2 );\
+    chatPage.classList.\cf7 add\cf2 (\cf6 'active'\cf2 );\
+  \} \cf9 else\cf2  \{\
+    passwordInput.classList.\cf7 add\cf2 (\cf6 'error'\cf2 );\
+    loginError.textContent \cf7 =\cf2  \cf6 'Incorrect password. Please try again.'\cf2 ;\
+    \cf7 setTimeout\cf2 (() \cf7 =>\cf2  passwordInput.classList.\cf7 remove\cf2 (\cf6 'error'\cf2 ), \cf5 500\cf2 );\
+  \}\
+\}\
+\
+\cf9 function\cf2  \cf7 togglePassword\cf2 () \{\
+  \cf9 const\cf2  type \cf7 =\cf2  passwordInput.type \cf7 ===\cf2  \cf6 'password'\cf2  \cf7 ?\cf2  \cf6 'text'\cf2  \cf7 :\cf2  \cf6 'password'\cf2 ;\
+  passwordInput.type \cf7 =\cf2  type;\
+\}\
+\
+\pard\pardeftab720\partightenfactor0
+\cf8 // Enter key for login\cf2 \
+passwordInput.\cf7 addEventListener\cf2 (\cf6 'keypress'\cf2 , (e) \cf7 =>\cf2  \{\
+  \cf9 if\cf2  (e.key \cf7 ===\cf2  \cf6 'Enter'\cf2 ) \cf7 checkPassword\cf2 ();\
+\});\
+\
+\cf8 // Close modal on escape key\cf2 \
+\cf7 document\cf2 .\cf7 addEventListener\cf2 (\cf6 'keydown'\cf2 , (e) \cf7 =>\cf2  \{\
+  \cf9 if\cf2  (e.key \cf7 ===\cf2  \cf6 'Escape'\cf2  \cf7 &&\cf2  passwordModal.classList.\cf7 contains\cf2 (\cf6 'active'\cf2 )) \{\
+    \cf7 closeModal\cf2 ();\
+  \}\
+\});\
+\
+\cf8 // Voice recognition setup\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf9 const\cf2  SpeechRecognition \cf7 =\cf2  \cf7 window\cf2 .SpeechRecognition \cf7 ||\cf2  \cf7 window\cf2 .webkitSpeechRecognition;\
+\cf9 let\cf2  recognition, isRecording \cf7 =\cf2  \cf5 false\cf2 ;\
+\
+\cf9 if\cf2  (SpeechRecognition) \{\
+  recognition \cf7 =\cf2  \cf9 new\cf2  \cf5 SpeechRecognition\cf2 ();\
+  recognition.continuous \cf7 =\cf2  \cf5 false\cf2 ;\
+  recognition.interimResults \cf7 =\cf2  \cf5 false\cf2 ;\
+  \
+  recognition.onresult \cf7 =\cf2  (e) \cf7 =>\cf2  \{\
+    \cf9 const\cf2  text \cf7 =\cf2  e.results[\cf5 0\cf2 ][\cf5 0\cf2 ].transcript;\
+    \
+    \cf9 if\cf2  (currentMode \cf7 ===\cf2  \cf6 'voice'\cf2 ) \{\
+      voiceStatus.textContent \cf7 =\cf2  \cf6 'You said: "'\cf2  \cf7 +\cf2  text \cf7 +\cf2  \cf6 '"'\cf2 ;\
+      voiceStatus.className \cf7 =\cf2  \cf6 'voice-status'\cf2 ;\
+      \cf7 sendToBoVoice\cf2 (text);\
+    \} \cf9 else\cf2  \{\
+      welcomeSection.classList.\cf7 add\cf2 (\cf6 'hidden'\cf2 );\
+      \cf7 addMessage\cf2 (\cf6 'user'\cf2 , text);\
+      \cf7 sendToBot\cf2 (text);\
+    \}\
+    \cf7 resetVoice\cf2 ();\
+  \};\
+  \
+  recognition.onerror \cf7 =\cf2  (e) \cf7 =>\cf2  \{\
+    \cf9 if\cf2  (currentMode \cf7 ===\cf2  \cf6 'voice'\cf2 ) \{\
+      voiceStatus.textContent \cf7 =\cf2  \cf6 'Could not hear. Tap to try again.'\cf2 ;\
+      voiceStatus.className \cf7 =\cf2  \cf6 'voice-status error'\cf2 ;\
+      voiceMainBtn.className \cf7 =\cf2  \cf6 'voice-main-btn'\cf2 ;\
+    \} \cf9 else\cf2  \{\
+      \cf7 setStatus\cf2 (\cf6 'Could not hear. Try again.'\cf2 , \cf6 'error'\cf2 );\
+    \}\
+    \cf7 resetVoice\cf2 ();\
+  \};\
+  \
+  recognition.onend \cf7 =\cf2  () \cf7 =>\cf2  \{\};\
+\}\
+\
+\pard\pardeftab720\partightenfactor0
+\cf8 // Mode switching\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf9 function\cf2  \cf7 setMode\cf2 (mode) \{\
+  currentMode \cf7 =\cf2  mode;\
+  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'voiceModeBtn'\cf2 ).classList.\cf7 toggle\cf2 (\cf6 'active'\cf2 , mode \cf7 ===\cf2  \cf6 'voice'\cf2 );\
+  \cf7 document\cf2 .\cf7 getElementById\cf2 (\cf6 'textModeBtn'\cf2 ).classList.\cf7 toggle\cf2 (\cf6 'active'\cf2 , mode \cf7 ===\cf2  \cf6 'text'\cf2 );\
+  voiceInterface.classList.\cf7 toggle\cf2 (\cf6 'hidden'\cf2 , mode \cf7 !==\cf2  \cf6 'voice'\cf2 );\
+  textInterface.classList.\cf7 toggle\cf2 (\cf6 'hidden'\cf2 , mode \cf7 !==\cf2  \cf6 'text'\cf2 );\
+\}\
+\
+\pard\pardeftab720\partightenfactor0
+\cf8 // Voice Main Button\cf2 \
+voiceMainBtn.onclick \cf7 =\cf2  () \cf7 =>\cf2  \{\
+  \cf9 if\cf2  (\cf7 !\cf2 recognition) \{\
+    voiceStatus.textContent \cf7 =\cf2  \cf6 'Voice not supported in this browser'\cf2 ;\
+    voiceStatus.className \cf7 =\cf2  \cf6 'voice-status error'\cf2 ;\
+    \cf9 return\cf2 ;\
+  \}\
+  \
+  \cf9 if\cf2  (isRecording) \{\
+    recognition.\cf7 stop\cf2 ();\
+    \cf7 resetVoice\cf2 ();\
+    voiceMainBtn.className \cf7 =\cf2  \cf6 'voice-main-btn'\cf2 ;\
+    voiceStatus.textContent \cf7 =\cf2  \cf6 'Tap the microphone to start'\cf2 ;\
+    voiceStatus.className \cf7 =\cf2  \cf6 'voice-status'\cf2 ;\
+  \} \cf9 else\cf2  \{\
+    \cf7 startVoiceListening\cf2 ();\
+  \}\
+\};\
+\
+\pard\pardeftab720\partightenfactor0
+\cf9 function\cf2  \cf7 startVoiceListening\cf2 () \{\
+  isRecording \cf7 =\cf2  \cf5 true\cf2 ;\
+  recognition.lang \cf7 =\cf2  \cf5 LANG\cf2 ;\
+  recognition.\cf7 start\cf2 ();\
+  voiceMainBtn.className \cf7 =\cf2  \cf6 'voice-main-btn listening'\cf2 ;\
+  voiceStatus.textContent \cf7 =\cf2  \cf6 'Listening... Speak now'\cf2 ;\
+  voiceStatus.className \cf7 =\cf2  \cf6 'voice-status listening'\cf2 ;\
+\}\
+\
+\cf9 function\cf2  \cf7 resetVoice\cf2 () \{\
+  isRecording \cf7 =\cf2  \cf5 false\cf2 ;\
+  micBtn.classList.\cf7 remove\cf2 (\cf6 'recording'\cf2 );\
+\}\
+\
+\pard\pardeftab720\partightenfactor0
+\cf8 // Send to Bo (Voice Mode)\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf9 async\cf2  \cf9 function\cf2  \cf7 sendToBoVoice\cf2 (text) \{\
+  voiceMainBtn.className \cf7 =\cf2  \cf6 'voice-main-btn processing'\cf2 ;\
+  voiceStatus.textContent \cf7 =\cf2  \cf6 'Bo is thinking...'\cf2 ;\
+  voiceStatus.className \cf7 =\cf2  \cf6 'voice-status processing'\cf2 ;\
+  \
+  \cf9 try\cf2  \{\
+    \cf9 const\cf2  res \cf7 =\cf2  \cf9 await\cf2  \cf7 fetch\cf2 (\cf5 WEBHOOK_URL\cf2 , \{\
+      \cf4 method\cf7 :\cf2  \cf6 'POST'\cf2 ,\
+      \cf4 headers\cf7 :\cf2  \{ \cf4 'Content-Type'\cf7 :\cf2  \cf6 'application/json'\cf2  \},\
+      \cf4 body\cf7 :\cf2  \cf5 JSON\cf2 .\cf7 stringify\cf2 (\{ \cf4 chatInput\cf7 :\cf2  text, \cf4 sessionId\cf7 :\cf2  \cf6 'voice_'\cf2  \cf7 +\cf2  \cf5 Date\cf2 .\cf7 now\cf2 () \})\
+    \});\
+    \
+    \cf9 const\cf2  data \cf7 =\cf2  \cf9 await\cf2  res.\cf7 json\cf2 ();\
+    \cf9 const\cf2  reply \cf7 =\cf2  data.output \cf7 ||\cf2  data.text \cf7 ||\cf2  data.response \cf7 ||\cf2  \cf6 'Message received.'\cf2 ;\
+    \
+    \cf9 let\cf2  displayText \cf7 =\cf2  reply;\
+    displayText \cf7 =\cf2  displayText.\cf7 replace\cf2 (\cf6 /https:\\/\\/image-charts\\.com\\/chart\\?[^\\s<>"]+/g\cf2 , (url) \cf7 =>\cf2  \{\
+      url \cf7 =\cf2  url.\cf7 replace\cf2 (\cf6 /[.,;:!?]+$/\cf2 , \cf6 ''\cf2 );\
+      \cf9 return\cf2  `\cf6 <img src="\cf2 $\{url\}\cf6 " alt="Chart">\cf2 `;\
+    \});\
+    voiceResponse.innerHTML \cf7 =\cf2  displayText;\
+    \
+    \cf9 const\cf2  speechText \cf7 =\cf2  reply.\cf7 replace\cf2 (\cf6 /https?:\\/\\/[^\\s]+/g\cf2 , \cf6 ''\cf2 ).\cf7 replace\cf2 (\cf6 /\\s+/g\cf2 , \cf6 ' '\cf2 ).\cf7 trim\cf2 ();\
+    \
+    voiceMainBtn.className \cf7 =\cf2  \cf6 'voice-main-btn speaking'\cf2 ;\
+    voiceStatus.textContent \cf7 =\cf2  \cf6 'Bo is speaking...'\cf2 ;\
+    voiceStatus.className \cf7 =\cf2  \cf6 'voice-status speaking'\cf2 ;\
+    \
+    \cf9 const\cf2  utterance \cf7 =\cf2  \cf9 new\cf2  \cf5 SpeechSynthesisUtterance\cf2 (speechText);\
+    utterance.lang \cf7 =\cf2  \cf5 LANG\cf2 ;\
+    utterance.onend \cf7 =\cf2  () \cf7 =>\cf2  \{\
+      voiceMainBtn.className \cf7 =\cf2  \cf6 'voice-main-btn'\cf2 ;\
+      voiceStatus.textContent \cf7 =\cf2  \cf6 'Tap to ask another question'\cf2 ;\
+      voiceStatus.className \cf7 =\cf2  \cf6 'voice-status'\cf2 ;\
+    \};\
+    speechSynthesis.\cf7 speak\cf2 (utterance);\
+    \
+  \} \cf9 catch\cf2  (err) \{\
+    voiceMainBtn.className \cf7 =\cf2  \cf6 'voice-main-btn'\cf2 ;\
+    voiceStatus.textContent \cf7 =\cf2  \cf6 'Bo is currently offline. Please try again later.'\cf2 ;\
+    voiceStatus.className \cf7 =\cf2  \cf6 'voice-status error'\cf2 ;\
+  \}\
+\}\
+\
+\pard\pardeftab720\partightenfactor0
+\cf8 // Card click effect\cf2 \
+\cf7 document\cf2 .\cf7 querySelectorAll\cf2 (\cf6 '.card'\cf2 ).\cf7 forEach\cf2 (card \cf7 =>\cf2  \{\
+  card.\cf7 addEventListener\cf2 (\cf6 'click'\cf2 , \cf9 function\cf2 () \{\
+    \cf7 document\cf2 .\cf7 querySelectorAll\cf2 (\cf6 '.card'\cf2 ).\cf7 forEach\cf2 (c \cf7 =>\cf2  c.classList.\cf7 remove\cf2 (\cf6 'active'\cf2 ));\
+    \cf9 this\cf2 .classList.\cf7 add\cf2 (\cf6 'active'\cf2 );\
+  \});\
+\});\
+\
+\cf8 // Language toggle\cf2 \
+\cf7 document\cf2 .\cf7 querySelectorAll\cf2 (\cf6 '.lang-btn'\cf2 ).\cf7 forEach\cf2 (btn \cf7 =>\cf2  \{\
+  btn.onclick \cf7 =\cf2  () \cf7 =>\cf2  \{\
+    \cf7 document\cf2 .\cf7 querySelectorAll\cf2 (\cf6 '.lang-btn'\cf2 ).\cf7 forEach\cf2 (b \cf7 =>\cf2  b.classList.\cf7 remove\cf2 (\cf6 'active'\cf2 ));\
+    \cf7 document\cf2 .\cf7 querySelectorAll\cf2 (`\cf6 .lang-btn[data-lang="\cf2 $\{btn.dataset.lang\}\cf6 "]\cf2 `).\cf7 forEach\cf2 (b \cf7 =>\cf2  b.classList.\cf7 add\cf2 (\cf6 'active'\cf2 ));\
+    \cf5 LANG\cf2  \cf7 =\cf2  btn.dataset.lang;\
+  \};\
+\});\
+\
+\cf8 // Navigation\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf9 function\cf2  \cf7 showChat\cf2 () \{\
+  \cf9 if\cf2  (isAuthenticated) \{\
+    introPage.classList.\cf7 add\cf2 (\cf6 'hidden'\cf2 );\
+    chatPage.classList.\cf7 add\cf2 (\cf6 'active'\cf2 );\
+  \} \cf9 else\cf2  \{\
+    \cf7 showPasswordModal\cf2 ();\
+  \}\
+\}\
+\
+\cf9 function\cf2  \cf7 showIntro\cf2 () \{\
+  introPage.classList.\cf7 remove\cf2 (\cf6 'hidden'\cf2 );\
+  chatPage.classList.\cf7 remove\cf2 (\cf6 'active'\cf2 );\
+\}\
+\
+\pard\pardeftab720\partightenfactor0
+\cf8 // Text mode - Mic button\cf2 \
+micBtn.onclick \cf7 =\cf2  () \cf7 =>\cf2  \{\
+  \cf9 if\cf2  (\cf7 !\cf2 recognition) \{\
+    \cf7 setStatus\cf2 (\cf6 'Voice not supported'\cf2 , \cf6 'error'\cf2 );\
+    \cf9 return\cf2 ;\
+  \}\
+  \
+  \cf9 if\cf2  (isRecording) \{\
+    recognition.\cf7 stop\cf2 ();\
+    \cf7 resetVoice\cf2 ();\
+  \} \cf9 else\cf2  \{\
+    isRecording \cf7 =\cf2  \cf5 true\cf2 ;\
+    recognition.lang \cf7 =\cf2  \cf5 LANG\cf2 ;\
+    recognition.\cf7 start\cf2 ();\
+    micBtn.classList.\cf7 add\cf2 (\cf6 'recording'\cf2 );\
+    \cf7 setStatus\cf2 (\cf6 'Listening...'\cf2 , \cf6 'processing'\cf2 );\
+  \}\
+\};\
+\
+\cf8 // Send message on Enter\cf2 \
+textInput.onkeypress \cf7 =\cf2  (e) \cf7 =>\cf2  \{\
+  \cf9 if\cf2  (e.key \cf7 ===\cf2  \cf6 'Enter'\cf2 ) \cf7 sendMessage\cf2 ();\
+\};\
+\
+\pard\pardeftab720\partightenfactor0
+\cf9 function\cf2  \cf7 sendMessage\cf2 () \{\
+  \cf9 const\cf2  text \cf7 =\cf2  textInput.value.\cf7 trim\cf2 ();\
+  \cf9 if\cf2  (\cf7 !\cf2 text) \cf9 return\cf2 ;\
+  \
+  welcomeSection.classList.\cf7 add\cf2 (\cf6 'hidden'\cf2 );\
+  \cf7 addMessage\cf2 (\cf6 'user'\cf2 , text);\
+  textInput.value \cf7 =\cf2  \cf6 ''\cf2 ;\
+  \cf7 sendToBot\cf2 (text);\
+\}\
+\
+\cf9 async\cf2  \cf9 function\cf2  \cf7 sendToBot\cf2 (text) \{\
+  \cf7 setStatus\cf2 (\cf6 'Bo is thinking...'\cf2 , \cf6 'processing'\cf2 );\
+  \
+  \cf9 const\cf2  typingDiv \cf7 =\cf2  \cf7 document\cf2 .\cf7 createElement\cf2 (\cf6 'div'\cf2 );\
+  typingDiv.className \cf7 =\cf2  \cf6 'message bot'\cf2 ;\
+  typingDiv.innerHTML \cf7 =\cf2  `\
+    <div class="avatar">\
+      <svg viewBox="0 0 512 512" fill="none">\
+        <circle cx="175" cy="190" r="160" fill="white"/>\
+        <circle cx="320" cy="335" r="160" fill="white"/>\
+        <clipPath id="clip3"><circle cx="175" cy="190" r="160"/></clipPath>\
+        <circle cx="320" cy="335" r="160" fill="#0d3d4d" clip-path="url(#clip3)"/>\
+        <circle cx="450" cy="75" r="40" fill="white"/>\
+        <circle cx="60" cy="435" r="32" fill="white"/>\
+      </svg>\
+    </div>\
+    <div class="bubble typing-bubble">\
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>\
+    </div>`;\
+  chat.\cf7 appendChild\cf2 (typingDiv);\
+  chat.scrollTop \cf7 =\cf2  chat.scrollHeight;\
+  \
+  \cf9 try\cf2  \{\
+    \cf9 const\cf2  res \cf7 =\cf2  \cf9 await\cf2  \cf7 fetch\cf2 (\cf5 WEBHOOK_URL\cf2 , \{\
+      \cf4 method\cf7 :\cf2  \cf6 'POST'\cf2 ,\
+      \cf4 headers\cf7 :\cf2  \{ \cf4 'Content-Type'\cf7 :\cf2  \cf6 'application/json'\cf2  \},\
+      \cf4 body\cf7 :\cf2  \cf5 JSON\cf2 .\cf7 stringify\cf2 (\{ \cf4 chatInput\cf7 :\cf2  text, \cf4 sessionId\cf7 :\cf2  \cf6 'bo_'\cf2  \cf7 +\cf2  \cf5 Date\cf2 .\cf7 now\cf2 () \})\
+    \});\
+    \
+    \cf9 const\cf2  data \cf7 =\cf2  \cf9 await\cf2  res.\cf7 json\cf2 ();\
+    \cf9 const\cf2  reply \cf7 =\cf2  data.output \cf7 ||\cf2  data.text \cf7 ||\cf2  data.response \cf7 ||\cf2  \cf6 'Message received.'\cf2 ;\
+    \
+    typingDiv.\cf7 remove\cf2 ();\
+    \cf7 addMessage\cf2 (\cf6 'bot'\cf2 , reply);\
+    \cf7 setStatus\cf2 (\cf6 ''\cf2 , \cf6 ''\cf2 );\
+  \} \cf9 catch\cf2  (err) \{\
+    typingDiv.\cf7 remove\cf2 ();\
+    \cf7 addMessage\cf2 (\cf6 'bot'\cf2 , \cf6 'I\\'m currently offline for maintenance. Please try again later or contact the administrator.'\cf2 );\
+    \cf7 setStatus\cf2 (\cf6 ''\cf2 , \cf6 ''\cf2 );\
+  \}\
+\}\
+\
+\cf9 function\cf2  \cf7 addMessage\cf2 (type, text) \{\
+  \cf9 const\cf2  div \cf7 =\cf2  \cf7 document\cf2 .\cf7 createElement\cf2 (\cf6 'div'\cf2 );\
+  div.className \cf7 =\cf2  \cf6 'message '\cf2  \cf7 +\cf2  type;\
+  \
+  \cf9 let\cf2  formattedText \cf7 =\cf2  text;\
+  formattedText \cf7 =\cf2  formattedText.\cf7 replace\cf2 (\cf6 /\\[([^\\]]+)\\]\\(([^)]+)\\)/g\cf2 , (match, linkText, url) \cf7 =>\cf2  \{\
+    \cf9 if\cf2  (url.\cf7 includes\cf2 (\cf6 'image-charts.com'\cf2 )) \{\
+      \cf9 return\cf2  `\cf6 <img src="\cf2 $\{url\}\cf6 " alt="\cf2 $\{linkText\}\cf6 " style="max-width:100%;border-radius:8px;margin:8px 0;">\cf2 `;\
+    \}\
+    \cf9 return\cf2  `\cf6 <a href="\cf2 $\{url\}\cf6 " target="_blank" style="color:#2d5a6b;">\cf2 $\{linkText\}\cf6 </a>\cf2 `;\
+  \});\
+  formattedText \cf7 =\cf2  formattedText.\cf7 replace\cf2 (\cf6 /https:\\/\\/image-charts\\.com\\/chart\\?[^\\s<>"]+/g\cf2 , (url) \cf7 =>\cf2  \{\
+    \cf9 return\cf2  `\cf6 <img src="\cf2 $\{url.replace(/[.,;:!?]+$/, '')\}\cf6 " alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;">\cf2 `;\
+  \});\
+  \
+  \cf9 if\cf2  (type \cf7 ===\cf2  \cf6 'bot'\cf2 ) \{\
+    \cf9 const\cf2  speechText \cf7 =\cf2  text.\cf7 replace\cf2 (\cf6 /https?:\\/\\/[^\\s]+/g\cf2 , \cf6 ''\cf2 ).\cf7 replace\cf2 (\cf6 /\\s+/g\cf2 , \cf6 ' '\cf2 ).\cf7 trim\cf2 ();\
+    div.innerHTML \cf7 =\cf2  `\
+      <div class="avatar">\
+        <svg viewBox="0 0 512 512" fill="none">\
+          <circle cx="175" cy="190" r="160" fill="white"/>\
+          <circle cx="320" cy="335" r="160" fill="white"/>\
+          <clipPath id="clip2"><circle cx="175" cy="190" r="160"/></clipPath>\
+          <circle cx="320" cy="335" r="160" fill="#0d3d4d" clip-path="url(#clip2)"/>\
+          <circle cx="450" cy="75" r="40" fill="white"/>\
+          <circle cx="60" cy="435" r="32" fill="white"/>\
+        </svg>\
+      </div>\
+      <div class="bubble">\
+        $\{formattedText\}\
+        <button class="speak-btn" data-speech="$\{speechText.replace(/"/g, '&quot;')\}">\
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">\
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>\
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>\
+          </svg>\
+        </button>\
+      </div>`;\
+    div.\cf7 querySelector\cf2 (\cf6 '.speak-btn'\cf2 ).\cf7 addEventListener\cf2 (\cf6 'click'\cf2 , \cf9 function\cf2 () \{\
+      speechSynthesis.\cf7 cancel\cf2 ();\
+      \cf9 const\cf2  u \cf7 =\cf2  \cf9 new\cf2  \cf5 SpeechSynthesisUtterance\cf2 (\cf9 this\cf2 .\cf7 getAttribute\cf2 (\cf6 'data-speech'\cf2 ));\
+      u.lang \cf7 =\cf2  \cf5 LANG\cf2 ;\
+      speechSynthesis.\cf7 speak\cf2 (u);\
+    \});\
+  \} \cf9 else\cf2  \{\
+    div.innerHTML \cf7 =\cf2  `<div class="avatar">
+\f2 \uc0\u55357 \u56420 
+\f0 </div><div class="bubble">$\{text\}</div>`;\
+  \}\
+  \
+  chat.\cf7 appendChild\cf2 (div);\
+  chat.scrollTop \cf7 =\cf2  chat.scrollHeight;\
+\}\
+\
+\cf9 function\cf2  \cf7 setStatus\cf2 (text, type) \{\
+  status.textContent \cf7 =\cf2  text;\
+  status.className \cf7 =\cf2  \cf6 'status '\cf2  \cf7 +\cf2  (type \cf7 ||\cf2  \cf6 ''\cf2 );\
+\}\
+</\cf4 script\cf2 >\
+</\cf4 body\cf2 >\
+</\cf4 html\cf2 >}
