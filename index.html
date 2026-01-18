@@ -485,7 +485,10 @@
       justify-content: center;
       flex-shrink: 0;
       font-size: 14px;
-      background: var(--light-grey);
+    }
+    
+    .message.bot .avatar {
+      background: var(--istia-dark);
     }
     
     .message.user .avatar {
@@ -1000,15 +1003,17 @@ const WEBHOOK_URL = 'https://istiasoftware.app.n8n.cloud/webhook/fccad074-5229-4
 let LANG = 'en-US';
 let currentMode = 'voice';
 
-// Istia Icon SVG - Function to generate unique IDs
+// Istia Icon SVG - White on dark background
 let iconCounter = 0;
 function getIstiaIcon() {
-  const id = 'clip' + (++iconCounter);
-  return `<svg viewBox="50 50 400 400" fill="none" style="width:100%;height:100%;">
-    <circle cx="175" cy="190" r="140" fill="#0d3d4d"/>
-    <circle cx="295" cy="310" r="140" fill="#0d3d4d"/>
-    <clipPath id="${id}"><circle cx="175" cy="190" r="140"/></clipPath>
-    <circle cx="295" cy="310" r="140" fill="white" clip-path="url(#${id})"/>
+  const id = 'clipIcon' + (++iconCounter);
+  return `<svg viewBox="0 0 512 512" fill="none">
+    <circle cx="175" cy="190" r="160" fill="white"/>
+    <circle cx="320" cy="335" r="160" fill="white"/>
+    <clipPath id="${id}"><circle cx="175" cy="190" r="160"/></clipPath>
+    <circle cx="320" cy="335" r="160" fill="#0d3d4d" clip-path="url(#${id})"/>
+    <circle cx="450" cy="75" r="40" fill="white"/>
+    <circle cx="60" cy="435" r="32" fill="white"/>
   </svg>`;
 }
 
