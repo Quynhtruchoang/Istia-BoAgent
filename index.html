@@ -1003,15 +1003,11 @@ const WEBHOOK_URL = 'https://istiasoftware.app.n8n.cloud/webhook/fccad074-5229-4
 let LANG = 'en-US';
 let currentMode = 'voice';
 
-// Istia Icon SVG - White on dark background
-let iconCounter = 0;
+// Istia Icon SVG - White on dark background, scaled down
 function getIstiaIcon() {
-  const id = 'clipIcon' + (++iconCounter);
-  return `<svg viewBox="0 0 512 512" fill="none">
+  return `<svg viewBox="0 0 512 512" fill="none" style="width:22px;height:22px;">
     <circle cx="175" cy="190" r="160" fill="white"/>
     <circle cx="320" cy="335" r="160" fill="white"/>
-    <clipPath id="${id}"><circle cx="175" cy="190" r="160"/></clipPath>
-    <circle cx="320" cy="335" r="160" fill="#0d3d4d" clip-path="url(#${id})"/>
     <circle cx="450" cy="75" r="40" fill="white"/>
     <circle cx="60" cy="435" r="32" fill="white"/>
   </svg>`;
