@@ -7,14 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --istia-dark: #0d3d4d;
-      --istia-teal: #2d5a6b;
-      --white: #ffffff;
-      --grey: #6b7280;
-      --light-grey: #f8f9fa;
-      --border: #e5e7eb;
-    }
+    :root { --istia-dark: #0d3d4d; --istia-teal: #2d5a6b; --white: #ffffff; --grey: #6b7280; --light-grey: #f8f9fa; --border: #e5e7eb; }
     body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--istia-dark); line-height: 1.6; }
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(13, 61, 77, 0.9); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
     .modal-overlay.active { display: flex; }
@@ -42,7 +35,6 @@
     .main-app.active { display: block; }
     .header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; border-bottom: 1px solid var(--border); }
     .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-    .logo-icon { width: 32px; height: 32px; }
     .logo-name { font-size: 24px; font-weight: 700; color: var(--istia-dark); }
     .logo-tagline { font-size: 11px; color: var(--istia-dark); border-left: 1px solid var(--istia-dark); padding-left: 12px; line-height: 1.4; }
     .header-right { display: flex; align-items: center; gap: 20px; }
@@ -116,7 +108,6 @@
     .status { text-align: center; font-size: 13px; color: var(--grey); margin-top: 12px; min-height: 20px; }
     .status.processing { color: #f59e0b; }
     .status.error { color: #dc2626; }
-    .status.listening { color: #059669; }
     .lang-toggle { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
     .lang-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: none; color: var(--grey); font-size: 12px; cursor: pointer; transition: all 0.2s; }
     .lang-btn:hover { border-color: var(--istia-dark); color: var(--istia-dark); }
@@ -159,11 +150,13 @@
   <div class="modal-overlay" id="passwordModal">
     <div class="login-container">
       <div class="login-logo">
-        <svg viewBox="0 0 100 100" fill="none">
-          <circle cx="38" cy="38" r="30" fill="#0d3d4d"/>
-          <circle cx="62" cy="62" r="30" fill="#0d3d4d"/>
-          <clipPath id="clipLogin"><circle cx="38" cy="38" r="30"/></clipPath>
-          <circle cx="62" cy="62" r="30" fill="white" clip-path="url(#clipLogin)"/>
+        <svg viewBox="0 0 512 512" fill="none">
+          <circle cx="175" cy="190" r="160" fill="#0d3d4d"/>
+          <circle cx="320" cy="335" r="160" fill="#0d3d4d"/>
+          <clipPath id="clipLogin"><circle cx="175" cy="190" r="160"/></clipPath>
+          <circle cx="320" cy="335" r="160" fill="white" clip-path="url(#clipLogin)"/>
+          <circle cx="450" cy="75" r="40" fill="#0d3d4d"/>
+          <circle cx="60" cy="435" r="32" fill="#0d3d4d"/>
         </svg>
         <span class="login-logo-text">Bo Agent</span>
       </div>
@@ -174,8 +167,7 @@
         <input type="password" class="login-input" id="passwordInput" placeholder="Enter password" autocomplete="off">
         <button class="toggle-password" onclick="togglePassword()">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-            <circle cx="12" cy="12" r="3"/>
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
           </svg>
         </button>
       </div>
@@ -189,11 +181,13 @@
   <div class="main-app active" id="mainApp">
     <header class="header">
       <div class="logo" onclick="showIntro()">
-        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" style="width:36px;height:36px;">
-          <circle cx="38" cy="38" r="30" fill="#0d3d4d"/>
-          <circle cx="62" cy="62" r="30" fill="#0d3d4d"/>
-          <clipPath id="clip1"><circle cx="38" cy="38" r="30"/></clipPath>
-          <circle cx="62" cy="62" r="30" fill="white" clip-path="url(#clip1)"/>
+        <svg viewBox="0 0 512 512" fill="none" style="width:36px;height:36px;">
+          <circle cx="175" cy="190" r="160" fill="#0d3d4d"/>
+          <circle cx="320" cy="335" r="160" fill="#0d3d4d"/>
+          <clipPath id="clip1"><circle cx="175" cy="190" r="160"/></clipPath>
+          <circle cx="320" cy="335" r="160" fill="white" clip-path="url(#clip1)"/>
+          <circle cx="450" cy="75" r="40" fill="#0d3d4d"/>
+          <circle cx="60" cy="435" r="32" fill="#0d3d4d"/>
         </svg>
         <span class="logo-name">Istia</span>
         <span class="logo-tagline">Your warehouse<br>automation guide</span>
@@ -208,121 +202,62 @@
         <section>
           <div class="section-title">
             <h2>About Bo</h2>
-            <p>Bo is an AI-powered assistant that consolidates warehouse data into one conversational interface. Based on customer pain points identified through warehouse interviews, Bo is designed to streamline operations by providing instant access to critical data and intelligent analysis.</p>
+            <p>Bo is an AI-powered assistant that consolidates warehouse data into one conversational interface.</p>
           </div>
           <div class="cards-grid">
             <div class="card">
-              <div class="card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-                  <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-                </svg>
-              </div>
+              <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
               <h3>Data Consolidation</h3>
-              <p>Aggregate information from multiple WMS screens into one unified view, eliminating the need to navigate between systems.</p>
+              <p>Aggregate information from multiple WMS screens into one unified view.</p>
             </div>
             <div class="card">
-              <div class="card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 21H4.6c-.6 0-.9 0-1.1-.1a1 1 0 0 1-.4-.4c-.1-.2-.1-.5-.1-1.1V3"/>
-                  <path d="m7 14 4-4 4 4 6-6"/>
-                </svg>
-              </div>
+              <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21H4.6c-.6 0-.9 0-1.1-.1a1 1 0 0 1-.4-.4c-.1-.2-.1-.5-.1-1.1V3"/><path d="m7 14 4-4 4 4 6-6"/></svg></div>
               <h3>Performance Analytics</h3>
-              <p>Generate visual charts and graphs to track operational KPIs, task completion rates, and warehouse efficiency metrics.</p>
+              <p>Generate visual charts and graphs to track operational KPIs.</p>
             </div>
             <div class="card">
-              <div class="card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
-                </svg>
-              </div>
+              <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div>
               <h3>Employee Performance</h3>
-              <p>Utilize algorithms to analyze individual employee productivity, task progress, and completion times for better workforce management.</p>
+              <p>Analyze individual employee productivity and task progress.</p>
             </div>
             <div class="card">
-              <div class="card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="2" y="7" width="20" height="14" rx="2"/>
-                  <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-                  <path d="M12 12v4"/><path d="M2 12h20"/>
-                </svg>
-              </div>
+              <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M12 12v4"/><path d="M2 12h20"/></svg></div>
               <h3>Order Tracking</h3>
-              <p>Instantly retrieve order status, delivery conditions, quantities, and product information through natural conversation.</p>
+              <p>Instantly retrieve order status and product information.</p>
             </div>
           </div>
         </section>
         <section class="features">
           <div class="section-title">
             <h2>Key Capabilities</h2>
-            <p>Bo combines conversational AI with powerful data analysis to deliver actionable insights.</p>
+            <p>Bo combines conversational AI with powerful data analysis.</p>
           </div>
           <div class="feature-cards">
             <div class="feature-card">
-              <div class="feature-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8"/>
-                  <rect x="12" y="6" width="3" height="12"/><rect x="17" y="12" width="3" height="6"/>
-                </svg>
-              </div>
-              <div class="feature-content">
-                <h4>Interactive Charts</h4>
-                <p>Visualize performance data with dynamic bar charts, line graphs, and progress indicators generated on demand.</p>
-              </div>
+              <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8"/><rect x="12" y="6" width="3" height="12"/><rect x="17" y="12" width="3" height="6"/></svg></div>
+              <div class="feature-content"><h4>Interactive Charts</h4><p>Visualize performance data with dynamic charts.</p></div>
             </div>
             <div class="feature-card">
-              <div class="feature-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/>
-                </svg>
-              </div>
-              <div class="feature-content">
-                <h4>Algorithm-Based Analysis</h4>
-                <p>Smart algorithms calculate employee efficiency scores based on task completion speed and accuracy.</p>
-              </div>
+              <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
+              <div class="feature-content"><h4>Algorithm-Based Analysis</h4><p>Smart algorithms calculate efficiency scores.</p></div>
             </div>
             <div class="feature-card">
-              <div class="feature-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                </svg>
-              </div>
-              <div class="feature-content">
-                <h4>Natural Language Interface</h4>
-                <p>Communicate with Bo through text input to get instant answers about warehouse operations. Voice input is also available when needed.</p>
-              </div>
+              <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+              <div class="feature-content"><h4>Natural Language Interface</h4><p>Communicate with Bo through text or voice.</p></div>
             </div>
             <div class="feature-card">
-              <div class="feature-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-                </svg>
-              </div>
-              <div class="feature-content">
-                <h4>Business Rules Explanation</h4>
-                <p>Understand why the system made certain decisions. Bo explains warehouse business rules and logic in simple terms.</p>
-              </div>
+              <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+              <div class="feature-content"><h4>Business Rules Explanation</h4><p>Bo explains warehouse business rules clearly.</p></div>
             </div>
           </div>
         </section>
         <section class="data-section">
           <h3>Data Points Bo Can Access</h3>
           <div class="data-tags">
-            <span class="data-tag">OrderNumber</span><span class="data-tag">OrderLine</span>
-            <span class="data-tag">DeliveryCondition</span><span class="data-tag">ProductCode</span>
-            <span class="data-tag">QuantityOrder</span><span class="data-tag">TaskUser</span>
-            <span class="data-tag">TaskProgress</span><span class="data-tag">TaskCompleted</span>
-            <span class="data-tag">LocationFrom</span><span class="data-tag">LocationTo</span>
-            <span class="data-tag">ZonesInTour</span><span class="data-tag">Distance</span>
-            <span class="data-tag">CarriersFilled</span><span class="data-tag">TourInfo</span>
+            <span class="data-tag">OrderNumber</span><span class="data-tag">OrderLine</span><span class="data-tag">DeliveryCondition</span><span class="data-tag">ProductCode</span><span class="data-tag">QuantityOrder</span><span class="data-tag">TaskUser</span><span class="data-tag">TaskProgress</span><span class="data-tag">TaskCompleted</span><span class="data-tag">LocationFrom</span><span class="data-tag">LocationTo</span><span class="data-tag">ZonesInTour</span><span class="data-tag">Distance</span><span class="data-tag">CarriersFilled</span><span class="data-tag">TourInfo</span>
           </div>
         </section>
-        <div class="cta">
-          <button class="cta-btn" onclick="showChat()">Try Bo Agent →</button>
-        </div>
+        <div class="cta"><button class="cta-btn" onclick="showChat()">Try Bo Agent →</button></div>
       </div>
     </div>
     
@@ -335,10 +270,7 @@
       <div class="voice-interface" id="voiceInterface">
         <div class="voice-status" id="voiceStatus">Tap the microphone to start</div>
         <button class="voice-main-btn" id="voiceMainBtn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="9" y="2" width="6" height="12" rx="3"/>
-            <path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
         </button>
         <div class="voice-response" id="voiceResponse"></div>
         <div class="voice-lang-toggle">
@@ -347,25 +279,13 @@
         </div>
       </div>
       <div class="text-interface hidden" id="textInterface">
-        <div class="welcome-section" id="welcomeSection">
-          <div class="welcome-text">How can I help you?</div>
-        </div>
+        <div class="welcome-section" id="welcomeSection"><div class="welcome-text">How can I help you?</div></div>
         <div class="chat-area" id="chat"></div>
         <div class="input-container">
           <div class="input-bar">
             <input type="text" id="textInput" placeholder="Ask anything about warehouse data..." />
-            <button class="mic-btn" id="micBtn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="9" y="2" width="6" height="12" rx="3"/>
-                <path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/>
-              </svg>
-            </button>
-            <button class="send-btn" onclick="sendMessage()">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="22" y1="2" x2="11" y2="13"/>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-              </svg>
-            </button>
+            <button class="mic-btn" id="micBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/></svg></button>
+            <button class="send-btn" onclick="sendMessage()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
           </div>
           <div class="status" id="status"></div>
           <div class="lang-toggle">
@@ -380,8 +300,7 @@
 <script>
 const DEMO_PASSWORD = 'Istia2026@n8n';
 const WEBHOOK_URL = 'https://istiasoftware.app.n8n.cloud/webhook/fccad074-5229-420d-9ef3-a5cb2bce6f3b/chat';
-let LANG = 'en-US';
-let currentMode = 'voice';
+let LANG = 'en-US', currentMode = 'voice';
 
 const passwordModal = document.getElementById('passwordModal');
 const passwordInput = document.getElementById('passwordInput');
@@ -426,12 +345,11 @@ if (SpeechRecognition) {
     else { welcomeSection.classList.add('hidden'); addMessage('user', text); sendToBot(text); }
     resetVoice();
   };
-  recognition.onerror = (e) => {
+  recognition.onerror = () => {
     if (currentMode === 'voice') { voiceStatus.textContent = 'Could not hear. Tap to try again.'; voiceStatus.className = 'voice-status error'; voiceMainBtn.className = 'voice-main-btn'; }
     else { setStatus('Could not hear. Try again.', 'error'); }
     resetVoice();
   };
-  recognition.onend = () => {};
 }
 
 function setMode(mode) {
@@ -443,7 +361,7 @@ function setMode(mode) {
 }
 
 voiceMainBtn.onclick = () => {
-  if (!recognition) { voiceStatus.textContent = 'Voice not supported in this browser'; voiceStatus.className = 'voice-status error'; return; }
+  if (!recognition) { voiceStatus.textContent = 'Voice not supported'; voiceStatus.className = 'voice-status error'; return; }
   if (isRecording) { recognition.stop(); resetVoice(); voiceMainBtn.className = 'voice-main-btn'; voiceStatus.textContent = 'Tap the microphone to start'; voiceStatus.className = 'voice-status'; }
   else { startVoiceListening(); }
 };
@@ -457,15 +375,15 @@ async function sendToBoVoice(text) {
     const res = await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chatInput: text, sessionId: 'voice_' + Date.now() }) });
     const data = await res.json();
     const reply = data.output || data.text || data.response || 'Message received.';
-    let displayText = reply.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => `<img src="${url}" alt="${alt || 'Chart'}" style="max-width:100%;border-radius:8px;margin:8px 0;">`);
-    displayText = displayText.replace(/https:\/\/image-charts\.com\/chart\?[^\s<>"]+/g, (url) => `<img src="${url.replace(/[.,;:!?]+$/, '')}" alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;">`);
+    let displayText = reply.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, url) => `<img src="${url}" alt="${alt || 'Chart'}">`);
+    displayText = displayText.replace(/https:\/\/image-charts\.com\/chart\?[^\s<>"]+/g, (url) => `<img src="${url.replace(/[.,;:!?]+$/, '')}" alt="Chart">`);
     voiceResponse.innerHTML = displayText;
     const speechText = reply.replace(/https?:\/\/[^\s]+/g, '').replace(/!\[[^\]]*\]\([^)]+\)/g, '').replace(/\s+/g, ' ').trim();
     voiceMainBtn.className = 'voice-main-btn speaking'; voiceStatus.textContent = 'Bo is speaking...'; voiceStatus.className = 'voice-status speaking';
     const utterance = new SpeechSynthesisUtterance(speechText); utterance.lang = LANG;
     utterance.onend = () => { voiceMainBtn.className = 'voice-main-btn'; voiceStatus.textContent = 'Tap to ask another question'; voiceStatus.className = 'voice-status'; };
     speechSynthesis.speak(utterance);
-  } catch (err) { voiceMainBtn.className = 'voice-main-btn'; voiceStatus.textContent = 'Bo is currently offline. Please try again later.'; voiceStatus.className = 'voice-status error'; }
+  } catch (err) { voiceMainBtn.className = 'voice-main-btn'; voiceStatus.textContent = 'Bo is currently offline.'; voiceStatus.className = 'voice-status error'; }
 }
 
 document.querySelectorAll('.card').forEach(card => { card.addEventListener('click', function() { document.querySelectorAll('.card').forEach(c => c.classList.remove('active')); this.classList.add('active'); }); });
@@ -486,29 +404,26 @@ function sendMessage() { const text = textInput.value.trim(); if (!text) return;
 async function sendToBot(text) {
   setStatus('Bo is thinking...', 'processing');
   const typingDiv = document.createElement('div'); typingDiv.className = 'message bot';
-  typingDiv.innerHTML = `<div class="avatar"><svg viewBox="0 0 100 100" fill="none"><circle cx="38" cy="38" r="30" fill="white"/><circle cx="62" cy="62" r="30" fill="white"/><clipPath id="clip3"><circle cx="38" cy="38" r="30"/></clipPath><circle cx="62" cy="62" r="30" fill="#0d3d4d" clip-path="url(#clip3)"/></svg></div><div class="bubble typing-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>`;
+  typingDiv.innerHTML = `<div class="avatar"><svg viewBox="0 0 100 100" fill="none"><circle cx="38" cy="50" r="20" fill="white"/><circle cx="62" cy="50" r="20" fill="white"/><clipPath id="clip3"><circle cx="38" cy="50" r="20"/></clipPath><circle cx="62" cy="50" r="20" fill="#0d3d4d" clip-path="url(#clip3)"/></svg></div><div class="bubble typing-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>`;
   chat.appendChild(typingDiv); chat.scrollTop = chat.scrollHeight;
   try {
     const res = await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chatInput: text, sessionId: 'bo_' + Date.now() }) });
     const data = await res.json();
     const reply = data.output || data.text || data.response || 'Message received.';
     typingDiv.remove(); addMessage('bot', reply); setStatus('', '');
-  } catch (err) { typingDiv.remove(); addMessage('bot', 'I\'m currently offline for maintenance. Please try again later or contact the administrator.'); setStatus('', ''); }
+  } catch (err) { typingDiv.remove(); addMessage('bot', 'I\'m currently offline for maintenance. Please try again later.'); setStatus('', ''); }
 }
 
 function addMessage(type, text) {
   const div = document.createElement('div'); div.className = 'message ' + type;
   let formattedText = text;
-  formattedText = formattedText.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => `<img src="${url}" alt="${alt || 'Chart'}" style="max-width:100%;border-radius:8px;margin:8px 0;">`);
-  formattedText = formattedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
-    if (url.includes('image-charts.com')) return `<img src="${url}" alt="${linkText}" style="max-width:100%;border-radius:8px;margin:8px 0;">`;
-    return `<a href="${url}" target="_blank" style="color:#2d5a6b;">${linkText}</a>`;
-  });
+  formattedText = formattedText.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, url) => `<img src="${url}" alt="${alt || 'Chart'}" style="max-width:100%;border-radius:8px;margin:8px 0;">`);
+  formattedText = formattedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, t, url) => url.includes('image-charts.com') ? `<img src="${url}" alt="${t}" style="max-width:100%;border-radius:8px;margin:8px 0;">` : `<a href="${url}" target="_blank" style="color:#2d5a6b;">${t}</a>`);
   formattedText = formattedText.replace(/https:\/\/image-charts\.com\/chart\?[^\s<>"]+/g, (url) => `<img src="${url.replace(/[.,;:!?]+$/, '')}" alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;">`);
   formattedText = formattedText.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   if (type === 'bot') {
     const speechText = text.replace(/https?:\/\/[^\s]+/g, '').replace(/!\[[^\]]*\]\([^)]+\)/g, '').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
-    div.innerHTML = `<div class="avatar"><svg viewBox="0 0 100 100" fill="none"><circle cx="38" cy="38" r="30" fill="white"/><circle cx="62" cy="62" r="30" fill="white"/><clipPath id="clip2"><circle cx="38" cy="38" r="30"/></clipPath><circle cx="62" cy="62" r="30" fill="#0d3d4d" clip-path="url(#clip2)"/></svg></div><div class="bubble">${formattedText}<button class="speak-btn" data-speech="${speechText.replace(/"/g, '&quot;')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></div>`;
+    div.innerHTML = `<div class="avatar"><svg viewBox="0 0 100 100" fill="none"><circle cx="38" cy="50" r="20" fill="white"/><circle cx="62" cy="50" r="20" fill="white"/><clipPath id="clip2"><circle cx="38" cy="50" r="20"/></clipPath><circle cx="62" cy="50" r="20" fill="#0d3d4d" clip-path="url(#clip2)"/></svg></div><div class="bubble">${formattedText}<button class="speak-btn" data-speech="${speechText.replace(/"/g, '&quot;')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></div>`;
     div.querySelector('.speak-btn').addEventListener('click', function() { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(this.getAttribute('data-speech')); u.lang = LANG; speechSynthesis.speak(u); });
   } else { div.innerHTML = `<div class="avatar">👤</div><div class="bubble">${text}</div>`; }
   chat.appendChild(div); chat.scrollTop = chat.scrollHeight;
