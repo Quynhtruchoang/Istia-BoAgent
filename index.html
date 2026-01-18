@@ -159,13 +159,11 @@
   <div class="modal-overlay" id="passwordModal">
     <div class="login-container">
       <div class="login-logo">
-        <svg viewBox="0 0 512 512" fill="none">
-          <circle cx="175" cy="190" r="160" fill="#0d3d4d"/>
-          <circle cx="320" cy="335" r="160" fill="#0d3d4d"/>
-          <clipPath id="clipLogin"><circle cx="175" cy="190" r="160"/></clipPath>
-          <circle cx="320" cy="335" r="160" fill="white" clip-path="url(#clipLogin)"/>
-          <circle cx="450" cy="75" r="40" fill="#0d3d4d"/>
-          <circle cx="60" cy="435" r="32" fill="#0d3d4d"/>
+        <svg viewBox="0 0 100 100" fill="none">
+          <circle cx="38" cy="38" r="30" fill="#0d3d4d"/>
+          <circle cx="62" cy="62" r="30" fill="#0d3d4d"/>
+          <clipPath id="clipLogin"><circle cx="38" cy="38" r="30"/></clipPath>
+          <circle cx="62" cy="62" r="30" fill="white" clip-path="url(#clipLogin)"/>
         </svg>
         <span class="login-logo-text">Bo Agent</span>
       </div>
@@ -191,13 +189,11 @@
   <div class="main-app active" id="mainApp">
     <header class="header">
       <div class="logo" onclick="showIntro()">
-        <svg class="logo-icon" viewBox="0 0 512 512" fill="none" style="width:36px;height:36px;">
-          <circle cx="175" cy="190" r="160" fill="#0d3d4d"/>
-          <circle cx="320" cy="335" r="160" fill="#0d3d4d"/>
-          <clipPath id="clip1"><circle cx="175" cy="190" r="160"/></clipPath>
-          <circle cx="320" cy="335" r="160" fill="white" clip-path="url(#clip1)"/>
-          <circle cx="450" cy="75" r="40" fill="#0d3d4d"/>
-          <circle cx="60" cy="435" r="32" fill="#0d3d4d"/>
+        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" style="width:36px;height:36px;">
+          <circle cx="38" cy="38" r="30" fill="#0d3d4d"/>
+          <circle cx="62" cy="62" r="30" fill="#0d3d4d"/>
+          <clipPath id="clip1"><circle cx="38" cy="38" r="30"/></clipPath>
+          <circle cx="62" cy="62" r="30" fill="white" clip-path="url(#clip1)"/>
         </svg>
         <span class="logo-name">Istia</span>
         <span class="logo-tagline">Your warehouse<br>automation guide</span>
@@ -461,9 +457,10 @@ async function sendToBoVoice(text) {
     const res = await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chatInput: text, sessionId: 'voice_' + Date.now() }) });
     const data = await res.json();
     const reply = data.output || data.text || data.response || 'Message received.';
-    let displayText = reply.replace(/https:\/\/image-charts\.com\/chart\?[^\s<>"]+/g, (url) => `<img src="${url.replace(/[.,;:!?]+$/, '')}" alt="Chart">`);
+    let displayText = reply.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => `<img src="${url}" alt="${alt || 'Chart'}" style="max-width:100%;border-radius:8px;margin:8px 0;">`);
+    displayText = displayText.replace(/https:\/\/image-charts\.com\/chart\?[^\s<>"]+/g, (url) => `<img src="${url.replace(/[.,;:!?]+$/, '')}" alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;">`);
     voiceResponse.innerHTML = displayText;
-    const speechText = reply.replace(/https?:\/\/[^\s]+/g, '').replace(/\s+/g, ' ').trim();
+    const speechText = reply.replace(/https?:\/\/[^\s]+/g, '').replace(/!\[[^\]]*\]\([^)]+\)/g, '').replace(/\s+/g, ' ').trim();
     voiceMainBtn.className = 'voice-main-btn speaking'; voiceStatus.textContent = 'Bo is speaking...'; voiceStatus.className = 'voice-status speaking';
     const utterance = new SpeechSynthesisUtterance(speechText); utterance.lang = LANG;
     utterance.onend = () => { voiceMainBtn.className = 'voice-main-btn'; voiceStatus.textContent = 'Tap to ask another question'; voiceStatus.className = 'voice-status'; };
@@ -489,7 +486,7 @@ function sendMessage() { const text = textInput.value.trim(); if (!text) return;
 async function sendToBot(text) {
   setStatus('Bo is thinking...', 'processing');
   const typingDiv = document.createElement('div'); typingDiv.className = 'message bot';
-  typingDiv.innerHTML = `<div class="avatar"><svg viewBox="0 0 512 512" fill="none"><circle cx="175" cy="190" r="160" fill="#0d3d4d"/><circle cx="320" cy="335" r="160" fill="#0d3d4d"/><clipPath id="clip3"><circle cx="175" cy="190" r="160"/></clipPath><circle cx="320" cy="335" r="160" fill="white" clip-path="url(#clip3)"/><circle cx="450" cy="75" r="40" fill="#0d3d4d"/><circle cx="60" cy="435" r="32" fill="#0d3d4d"/></svg></div><div class="bubble typing-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>`;
+  typingDiv.innerHTML = `<div class="avatar"><svg viewBox="0 0 100 100" fill="none"><circle cx="38" cy="38" r="30" fill="white"/><circle cx="62" cy="62" r="30" fill="white"/><clipPath id="clip3"><circle cx="38" cy="38" r="30"/></clipPath><circle cx="62" cy="62" r="30" fill="#0d3d4d" clip-path="url(#clip3)"/></svg></div><div class="bubble typing-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>`;
   chat.appendChild(typingDiv); chat.scrollTop = chat.scrollHeight;
   try {
     const res = await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chatInput: text, sessionId: 'bo_' + Date.now() }) });
@@ -502,14 +499,16 @@ async function sendToBot(text) {
 function addMessage(type, text) {
   const div = document.createElement('div'); div.className = 'message ' + type;
   let formattedText = text;
+  formattedText = formattedText.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => `<img src="${url}" alt="${alt || 'Chart'}" style="max-width:100%;border-radius:8px;margin:8px 0;">`);
   formattedText = formattedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
     if (url.includes('image-charts.com')) return `<img src="${url}" alt="${linkText}" style="max-width:100%;border-radius:8px;margin:8px 0;">`;
     return `<a href="${url}" target="_blank" style="color:#2d5a6b;">${linkText}</a>`;
   });
   formattedText = formattedText.replace(/https:\/\/image-charts\.com\/chart\?[^\s<>"]+/g, (url) => `<img src="${url.replace(/[.,;:!?]+$/, '')}" alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;">`);
+  formattedText = formattedText.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   if (type === 'bot') {
-    const speechText = text.replace(/https?:\/\/[^\s]+/g, '').replace(/\s+/g, ' ').trim();
-    div.innerHTML = `<div class="avatar"><svg viewBox="0 0 512 512" fill="none"><circle cx="175" cy="190" r="160" fill="#0d3d4d"/><circle cx="320" cy="335" r="160" fill="#0d3d4d"/><clipPath id="clip2"><circle cx="175" cy="190" r="160"/></clipPath><circle cx="320" cy="335" r="160" fill="white" clip-path="url(#clip2)"/><circle cx="450" cy="75" r="40" fill="#0d3d4d"/><circle cx="60" cy="435" r="32" fill="#0d3d4d"/></svg></div><div class="bubble">${formattedText}<button class="speak-btn" data-speech="${speechText.replace(/"/g, '&quot;')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></div>`;
+    const speechText = text.replace(/https?:\/\/[^\s]+/g, '').replace(/!\[[^\]]*\]\([^)]+\)/g, '').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
+    div.innerHTML = `<div class="avatar"><svg viewBox="0 0 100 100" fill="none"><circle cx="38" cy="38" r="30" fill="white"/><circle cx="62" cy="62" r="30" fill="white"/><clipPath id="clip2"><circle cx="38" cy="38" r="30"/></clipPath><circle cx="62" cy="62" r="30" fill="#0d3d4d" clip-path="url(#clip2)"/></svg></div><div class="bubble">${formattedText}<button class="speak-btn" data-speech="${speechText.replace(/"/g, '&quot;')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></div>`;
     div.querySelector('.speak-btn').addEventListener('click', function() { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(this.getAttribute('data-speech')); u.lang = LANG; speechSynthesis.speak(u); });
   } else { div.innerHTML = `<div class="avatar">👤</div><div class="bubble">${text}</div>`; }
   chat.appendChild(div); chat.scrollTop = chat.scrollHeight;
