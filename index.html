@@ -1292,7 +1292,7 @@ function addMessage(type, text) {
       speechSynthesis.speak(u);
     });
   } else {
-    div.innerHTML = `<div class="avatar">👤</div><div class="bubble">${text}</div>`;
+div.innerHTML = `<div class="avatar" style="background:#2d5a6b;"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:18px;height:18px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div><div class="bubble">${text}</div>`;
   }
   
   chat.appendChild(div);
