@@ -1262,13 +1262,26 @@ function addMessage(type, text) {
   div.className = 'message ' + type;
   
   let formattedText = text;
-  formattedText = formattedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
-    if (url.includes('image-charts.com')) return `<img src="${url}" alt="${linkText}" style="max-width:100%;border-radius:8px;margin:8px 0;">`;
-    return `<a href="${url}" target="_blank" style="color:#2d5a6b;">${linkText}</a>`;
-  });
-  formattedText = formattedText.replace(/https:\/\/image-charts\.com\/chart\?[^\s<>"]+/g, (url) => {
-    return `<img src="${url.replace(/[.,;:!?]+$/, '')}" alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;">`;
-  });
+  
+  // Tìm BẤT KỲ image-charts URL nào
+  const urlMatch = text.match(/https:\/\/image-charts\.com\/chart\?[^\s<>")\]]+/);
+  
+  if (urlMatch) {
+    let chartUrl = urlMatch[0];
+    
+    // Encode | thành %7C
+    chartUrl = chartUrl.replace(/\|/g, '%7C');
+    
+    // Xóa các phần bị lỗi trong text
+    formattedText = text
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+      .replace(/https:\/\/image-charts\.com[^\s]*/g, '')
+      .replace(/" alt="[^"]*" style="[^"]*">/g, '')
+      .trim();
+    
+    // Thêm image tag đúng
+    formattedText += '<br><img src="' + chartUrl + '" alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;">';
+  }
   
   if (type === 'bot') {
     const speechText = text.replace(/https?:\/\/[^\s]+/g, '').replace(/\s+/g, ' ').trim();
@@ -1288,7 +1301,7 @@ function addMessage(type, text) {
       speechSynthesis.speak(u);
     });
   } else {
-    div.innerHTML = `<div class="avatar">👤</div><div class="bubble">${text}</div>`;
+    div.innerHTML = `<div class="avatar" style="background:#2d5a6b;color:white;font-weight:600;">U</div><div class="bubble">${text}</div>`;
   }
   
   chat.appendChild(div);
