@@ -159,7 +159,7 @@
       <button class="login-btn" onclick="checkPassword()">Access Demo</button>
       <button class="cancel-btn" onclick="closeModal()">Cancel</button>
       <p class="login-error" id="loginError"></p>
-      <div class="login-footer"><p>Quynh Hoang • Patrick Bom</p></div>
+      <div class="login-footer"><p>Quynh Hoang - Patrick Bom</p></div>
     </div>
   </div>
 
@@ -187,12 +187,12 @@
             <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M12 12v4"/><path d="M2 12h20"/></svg></div><h3>Order Tracking</h3><p>Instantly retrieve order status and product information.</p></div>
           </div>
         </section>
-        <div class="cta"><button class="cta-btn" onclick="showChat()">Try Bo Agent →</button></div>
+        <div class="cta"><button class="cta-btn" onclick="showChat()">Try Bo Agent</button></div>
       </div>
     </div>
     
     <div class="chat-page" id="chatPage">
-      <button class="back-btn" onclick="showIntro()">← Back to About</button>
+      <button class="back-btn" onclick="showIntro()">Back to About</button>
       <div class="mode-toggle">
         <button class="mode-btn active" id="voiceModeBtn" onclick="setMode('voice')">Voice Mode</button>
         <button class="mode-btn" id="textModeBtn" onclick="setMode('text')">Text Mode</button>
@@ -322,27 +322,28 @@ function resetVoice() { isRecording = false; micBtn.classList.remove('recording'
 // FIXED: Function to format text with chart images
 function formatTextWithCharts(text) {
   let formatted = text;
-  // 1. Handle markdown images: ![alt](url)
-  formatted = formatted.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
-    return `<img src="${url}" alt="${alt || 'Chart'}" style="max-width:100%;border-radius:8px;margin:8px 0;">`;
+  
+  // 1. Remove broken HTML fragments like: " alt="..." style="...">
+  formatted = formatted.replace(/"\s*alt="[^"]*"\s*style="[^"]*"\s*>/gi, '');
+  
+  // 2. Handle markdown images: ![alt](url) - encode pipe characters
+  formatted = formatted.replace(/!\[([^\]]*)\]\((https?:\/\/[^)]+)\)/g, function(match, alt, url) {
+    var safeUrl = url.replace(/\|/g, '%7C');
+    return '<img src="' + safeUrl + '" alt="' + (alt || 'Chart') + '" style="max-width:100%;border-radius:8px;margin:8px 0;">';
   });
-  // 2. Handle markdown links: [text](url)
-  formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
-    if (url.includes('image-charts.com') || url.includes('quickchart.io')) {
-      return `<img src="${url}" alt="${linkText}" style="max-width:100%;border-radius:8px;margin:8px 0;">`;
-    }
-    return `<a href="${url}" target="_blank" style="color:#2d5a6b;">${linkText}</a>`;
-  });
+  
   // 3. Handle plain image-charts URLs
-  formatted = formatted.replace(/(https:\/\/image-charts\.com\/chart\?[^\s<>"]+)/g, (url) => {
-    const cleanUrl = url.replace(/[.,;:!?]+$/, '');
-    return `<img src="${cleanUrl}" alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;">`;
+  formatted = formatted.replace(/(https:\/\/image-charts\.com\/chart\?[^\s<>")\]]+)/g, function(url) {
+    var safeUrl = url.replace(/\|/g, '%7C').replace(/[.,;:!?]+$/, '');
+    return '<img src="' + safeUrl + '" alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;">';
   });
+  
   // 4. Handle plain quickchart URLs
-  formatted = formatted.replace(/(https:\/\/quickchart\.io\/chart\?[^\s<>"]+)/g, (url) => {
-    const cleanUrl = url.replace(/[.,;:!?]+$/, '');
-    return `<img src="${cleanUrl}" alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;">`;
+  formatted = formatted.replace(/(https:\/\/quickchart\.io\/chart\?[^\s<>")\]]+)/g, function(url) {
+    var safeUrl = url.replace(/\|/g, '%7C').replace(/[.,;:!?]+$/, '');
+    return '<img src="' + safeUrl + '" alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;">';
   });
+  
   return formatted;
 }
 
@@ -371,7 +372,7 @@ async function sendToBoVoice(text) {
 }
 
 document.querySelectorAll('.card').forEach(card => { card.addEventListener('click', function() { document.querySelectorAll('.card').forEach(c => c.classList.remove('active')); this.classList.add('active'); }); });
-document.querySelectorAll('.lang-btn').forEach(btn => { btn.onclick = () => { document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll(`.lang-btn[data-lang="${btn.dataset.lang}"]`).forEach(b => b.classList.add('active')); LANG = btn.dataset.lang; }; });
+document.querySelectorAll('.lang-btn').forEach(btn => { btn.onclick = () => { document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.lang-btn[data-lang="' + btn.dataset.lang + '"]').forEach(b => b.classList.add('active')); LANG = btn.dataset.lang; }; });
 
 function showChat() { if (isAuthenticated) { introPage.classList.add('hidden'); chatPage.classList.add('active'); } else { showPasswordModal(); } }
 function showIntro() { introPage.classList.remove('hidden'); chatPage.classList.remove('active'); }
@@ -397,7 +398,7 @@ async function sendToBot(text) {
   setStatus('Bo is thinking...', 'processing');
   const typingDiv = document.createElement('div');
   typingDiv.className = 'message bot';
-  typingDiv.innerHTML = `<div class="avatar">${getIstiaIcon()}</div><div class="bubble typing-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>`;
+  typingDiv.innerHTML = '<div class="avatar">' + getIstiaIcon() + '</div><div class="bubble typing-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
   chat.appendChild(typingDiv);
   chat.scrollTop = chat.scrollHeight;
   try {
@@ -409,7 +410,7 @@ async function sendToBot(text) {
     setStatus('', '');
   } catch (err) {
     typingDiv.remove();
-    addMessage('bot', 'I\'m currently offline for maintenance. Please try again later.');
+    addMessage('bot', 'I am currently offline for maintenance. Please try again later.');
     setStatus('', '');
   }
 }
@@ -420,10 +421,10 @@ function addMessage(type, text) {
   const formattedText = formatTextWithCharts(text);
   if (type === 'bot') {
     const speechText = text.replace(/https?:\/\/[^\s]+/g, '').replace(/!\[[^\]]*\]/g, '').replace(/\s+/g, ' ').trim();
-    div.innerHTML = `<div class="avatar">${getIstiaIcon()}</div><div class="bubble">${formattedText}<button class="speak-btn" data-speech="${speechText.replace(/"/g, '&quot;')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></div>`;
+    div.innerHTML = '<div class="avatar">' + getIstiaIcon() + '</div><div class="bubble">' + formattedText + '<button class="speak-btn" data-speech="' + speechText.replace(/"/g, '&quot;') + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></div>';
     div.querySelector('.speak-btn').addEventListener('click', function() { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(this.getAttribute('data-speech')); u.lang = LANG; speechSynthesis.speak(u); });
   } else {
-    div.innerHTML = `<div class="avatar">👤</div><div class="bubble">${text}</div>`;
+    div.innerHTML = '<div class="avatar">U</div><div class="bubble">' + text + '</div>';
   }
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
