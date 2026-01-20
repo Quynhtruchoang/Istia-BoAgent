@@ -1263,24 +1263,15 @@ function addMessage(type, text) {
   
   let formattedText = text;
   
-  // Tìm BẤT KỲ image-charts URL nào
-  const urlMatch = text.match(/https:\/\/image-charts\.com\/chart\?[^\s<>")\]]+/);
+  // Tìm plain URL
+  const urlMatch = text.match(/(https:\/\/image-charts\.com\/chart\?[^\s<>"]+)/);
   
   if (urlMatch) {
     let chartUrl = urlMatch[0];
+    chartUrl = chartUrl.replace(/\|/g, '%7C'); // Encode |
     
-    // Encode | thành %7C
-    chartUrl = chartUrl.replace(/\|/g, '%7C');
-    
-    // Xóa các phần bị lỗi trong text
-    formattedText = text
-      .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
-      .replace(/https:\/\/image-charts\.com[^\s]*/g, '')
-      .replace(/" alt="[^"]*" style="[^"]*">/g, '')
-      .trim();
-    
-    // Thêm image tag đúng
-    formattedText += '<br><img src="' + chartUrl + '" alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;">';
+    // Thay URL bằng image tag
+    formattedText = text.replace(urlMatch[0], '<br><img src="' + chartUrl + '" alt="Chart" style="max-width:100%;border-radius:8px;margin:8px 0;"><br>');
   }
   
   if (type === 'bot') {
@@ -1301,13 +1292,12 @@ function addMessage(type, text) {
       speechSynthesis.speak(u);
     });
   } else {
-    div.innerHTML = `<div class="avatar" style="background:#2d5a6b;color:white;font-weight:600;">U</div><div class="bubble">${text}</div>`;
+    div.innerHTML = `<div class="avatar">👤</div><div class="bubble">${text}</div>`;
   }
   
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
 }
-
 
 function setStatus(text, type) { status.textContent = text; status.className = 'status ' + (type || ''); }
 </script>
